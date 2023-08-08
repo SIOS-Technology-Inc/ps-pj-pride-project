@@ -1,16 +1,14 @@
-import { RecoilRoot } from 'recoil';
-
-import './App.css';
 import { RouterConfig } from './router/RouterConfig';
 import { BrowserRouter } from 'react-router-dom';
+import { RouterAuthenticatedCheck } from './utilities/RouterAuthenticatedCheck';
 
 function App() {
   return (
-    <RecoilRoot>
-      <BrowserRouter>
+    <BrowserRouter>
+      <RouterAuthenticatedCheck>
         <RouterConfig />
-      </BrowserRouter>
-    </RecoilRoot>
+      </RouterAuthenticatedCheck>
+    </BrowserRouter>
   );
 }
 
