@@ -1,7 +1,9 @@
+import { useMemo } from 'react';
+
+import { signInWithRedirect, signOut } from 'firebase/auth';
+
 import { auth, provider } from '@/auth/authFirebase';
 import { firebaseAuthType } from '@/types/firebaseAuthType';
-import { signInWithRedirect, signOut } from 'firebase/auth';
-import { useMemo } from 'react';
 
 export const useFirebaseAuth = () => {
   const signInAction = () => {
@@ -12,10 +14,7 @@ export const useFirebaseAuth = () => {
   const singOutAction = () => {
     signOut(auth);
   };
-  const uid: string = useMemo(
-    () => (auth.currentUser ? auth.currentUser.uid : ''),
-    [auth.currentUser]
-  );
+  const uid: string = useMemo(() => (auth.currentUser ? auth.currentUser.uid : ''), []);
   const user: firebaseAuthType = useMemo(() => {
     if (auth.currentUser) {
       return {
@@ -28,7 +27,7 @@ export const useFirebaseAuth = () => {
         displayName: '',
       };
     }
-  }, [auth.currentUser]);
+  }, []);
 
   return { signInAction, singOutAction, uid, user };
 };

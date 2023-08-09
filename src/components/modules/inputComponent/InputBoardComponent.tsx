@@ -1,27 +1,22 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { InputFormPrideContentType } from '@/types/contentsType';
+
 import { ButtonComponent } from '../ButtonComponent';
 
 import { InputItemComponent, TextAreaItemComponent } from './InputItemComponent';
 
-type FormValuesProps = {
-  title: string;
-  serviceName: string;
-  customerName: string;
-  memo: string;
-};
-
 export const InputBoardComponent = () => {
-  const { handleSubmit, control } = useForm<FormValuesProps>({
+  const { handleSubmit, control } = useForm<InputFormPrideContentType>({
     defaultValues: {
       title: '',
       serviceName: '',
       customerName: '',
-      memo: '',
+      sentence: '',
     },
   });
 
-  const onSubmit: SubmitHandler<FormValuesProps> = (data: FormValuesProps) => {
+  const onSubmit: SubmitHandler<InputFormPrideContentType> = (data: InputFormPrideContentType) => {
     console.log(data);
   };
   return (
@@ -49,7 +44,7 @@ export const InputBoardComponent = () => {
           validation="10文字以内"
         />
         <TextAreaItemComponent
-          name={'memo'}
+          name={'sentence'}
           control={control}
           label="チャレンジ内容"
           validation="50文字以内"

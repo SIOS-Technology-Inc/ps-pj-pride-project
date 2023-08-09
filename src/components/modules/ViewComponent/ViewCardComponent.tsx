@@ -1,19 +1,19 @@
+import { PrideContentType } from '@/types/contentsType';
+
 import { ThumbsUpButton } from '../ButtonComponent';
 
 import { ViewMultiLineImgListContent, ViewOneLineContent } from './ViewContentComponent';
 
 type ViewCardComponentProps = {
-  userName: string;
-  userPhotoURL: string;
-  title: string;
-  serviceName: string;
-  customerName: string;
-  memo: string;
-  thumbsUsers: string[];
+  uid: string;
+  prideContent: PrideContentType;
+  onClick: (number: number) => void;
 };
 
 export const ViewCardComponent = (props: ViewCardComponentProps) => {
-  const { userName, customerName, serviceName, thumbsUsers, title, memo, userPhotoURL } = props;
+  const { prideContent } = props;
+  const { userName, customerName, serviceName, thumbsUsers, title, sentence, userPhotoURL } =
+    prideContent;
   return (
     <>
       <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg p-3 shadow-lg">
@@ -34,7 +34,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
             <ViewOneLineContent label="対象サービス" content={serviceName} />
             <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
           </div>
-          <span className="text-lg">{memo}</span>
+          <span className="text-lg">{sentence}</span>
           <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
         </div>
       </div>
