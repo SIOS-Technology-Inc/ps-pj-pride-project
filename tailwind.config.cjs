@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         kurenaido: ['Zen Kurenaido'],
+        zen: ['Zen Maru Gothic'],
       },
       colors: {
         gray: '#666666',
