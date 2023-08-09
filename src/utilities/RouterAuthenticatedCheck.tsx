@@ -8,14 +8,13 @@ import { auth } from '../auth/authFirebase';
 
 import { LoadingComponent } from './LoadingComponent';
 
-
 type Props = {
   children: React.ReactNode;
 };
 
 export const RouterAuthenticatedCheck = (props: Props) => {
   const { children } = props;
-  const { signInAction, uid } = useFirebaseAuth();
+  const { signInAction } = useFirebaseAuth();
 
   const [loading, setLoading] = useState<boolean>(false);
 
