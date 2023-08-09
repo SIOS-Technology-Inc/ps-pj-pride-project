@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { FiThumbsUp } from 'react-icons/fi';
 
 type ButtonComponentProps = {
@@ -20,15 +22,24 @@ export const ButtonComponent = (props: ButtonComponentProps) => {
 };
 
 type ThumbsUpButtonType = {
+  disable?: boolean;
   onClick: () => void;
 };
 export const ThumbsUpButton = (props: ThumbsUpButtonType) => {
-  const { onClick } = props;
+  const { onClick, disable } = props;
+  const [firstClick, setFirstClick] = useState<boolean>(false);
+
+  const onClickThumbsUpButton = async () => {
+    setFirstClick(true);
+    await onClick();
+    setFirstClick(false);
+  };
   return (
     <>
       <button
         className="flex flex-row items-center gap-1 rounded-lg bg-[#DBDBDB] p-2 text-gray transition-transform hover:-translate-x-1 hover:-translate-y-1"
-        onClick={onClick}
+        onClick={onClickThumbsUpButton}
+        disabled={firstClick || disable}
       >
         <span>いいね！</span>
         <FiThumbsUp />

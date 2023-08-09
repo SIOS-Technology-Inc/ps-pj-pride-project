@@ -1,3 +1,4 @@
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 import { PrideContentType } from '@/types/contentsType';
 
 import { ThumbsUpButton } from '../ButtonComponent';
@@ -5,15 +6,17 @@ import { ThumbsUpButton } from '../ButtonComponent';
 import { ViewMultiLineImgListContent, ViewOneLineContent } from './ViewContentComponent';
 
 type ViewCardComponentProps = {
-  uid: string;
   prideContent: PrideContentType;
-  onClick: (number: number) => void;
+  onClick: () => void;
 };
 
 export const ViewCardComponent = (props: ViewCardComponentProps) => {
-  const { prideContent } = props;
+  const { prideContent, onClick } = props;
   const { userName, customerName, serviceName, thumbsUsers, title, sentence, userPhotoURL } =
     prideContent;
+
+  const { user } = useFirebaseAuth();
+
   return (
     <>
       <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg p-3 shadow-lg">
@@ -22,11 +25,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
             <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
             <span className="text-lg ">{userName}</span>
           </div>
-          <ThumbsUpButton
-            onClick={() => {
-              null;
-            }}
-          />
+          <ThumbsUpButton onClick={() => onClick()} disable={thumbsUsers.includes(user.photoURL)} />
         </div>
         <h2 className="text-2xl">{title}</h2>
         <div className="flex flex-col gap-4">

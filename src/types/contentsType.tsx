@@ -14,3 +14,8 @@ export type InputFormPrideContentType = {
   customerName: string;
   sentence: string;
 };
+
+export type PrideContentFirestoreDataType = {
+  uid: string;
+  pride: PrideContentType;
+};

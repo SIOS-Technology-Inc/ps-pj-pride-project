@@ -5,20 +5,19 @@ import {
   SnapshotOptions,
   addDoc,
   collection,
+  doc,
+  getDoc,
   getDocs,
+  updateDoc,
 } from 'firebase/firestore';
+import useSWR from 'swr';
 
 import { db } from '@/auth/authFirebase';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentFirestoreDataType, PrideContentType } from '@/types/contentsType';
 
 export const useFirestorePrideContent = () => {
   const today = new Date();
   const collectionName = today.getFullYear() + '-' + (today.getMonth() + 1) + '-pride';
-
-  type PrideContentFirestoreDataType = {
-    uid?: string;
-    pride: PrideContentType;
-  };
 
   const prideDataConverter: FirestoreDataConverter<PrideContentFirestoreDataType> = {
     toFirestore(content: PrideContentFirestoreDataType): DocumentData {
@@ -45,13 +44,42 @@ export const useFirestorePrideContent = () => {
   };
   const createPride = async (content: PrideContentType): Promise<void> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
-    await addDoc(collRef, { pride: content });
+    await addDoc(collRef, { uid: '自動生成されるのでダミーで入れてます', pride: content });
   };
   const readThisMonthPrideList = async (): Promise<PrideContentFirestoreDataType[]> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
     const snapshot = await getDocs(collRef);
     return snapshot.docs.map((doc) => doc.data());
   };
+  const pushLikeForPride = async (uid: string, photoURL: string): Promise<void> => {
+    const docRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
+    const snapshot = await getDoc(docRef);
 
-  return { createPride, readThisMonthPrideList };
+    const data = snapshot.data();
+    console.log(data);
+
+    if (!data) return;
+    const thumbsUsers = data.pride.thumbsUsers;
+    const registerThumbsUser = Array.from(new Set([...thumbsUsers, photoURL]));
+    console.log(registerThumbsUser);
+
+    const updateDocRef = doc(db, collectionName, uid);
+    await updateDoc(updateDocRef, {
+      thumbsUsers: registerThumbsUser,
+    });
+  };
+
+  const {
+    data: prideContentList,
+    mutate: prideContentMutate,
+    isLoading: isLoadingPrideContent,
+  } = useSWR('prideContent', () => readThisMonthPrideList());
+
+  return {
+    createPride,
+    prideContentList,
+    prideContentMutate,
+    isLoadingPrideContent,
+    pushLikeForPride,
+  };
 };
