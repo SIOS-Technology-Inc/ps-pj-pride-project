@@ -1,7 +1,8 @@
-import InputLinkImage from 'src/assets/input-link.png';
-import EvaluationLinkImage from 'src/assets/evaluation-link.png';
+import { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
+
+import EvaluationLinkImage from 'src/assets/evaluation-link.png';
+import InputLinkImage from 'src/assets/input-link.png';
 
 export const MenuComponent = () => {
   const location = useLocation();
@@ -9,7 +10,7 @@ export const MenuComponent = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-around w-full">
+      <div className="flex w-full flex-row justify-around">
         <Link to={'/'} className={pathName == '/' ? 'opacity-40' : ''}>
           <img src={InputLinkImage} alt="" className="w-32 object-contain hover:cursor-pointer" />
         </Link>

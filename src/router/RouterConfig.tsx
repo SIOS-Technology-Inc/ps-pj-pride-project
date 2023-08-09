@@ -1,6 +1,7 @@
+import { Route, Routes } from 'react-router-dom';
+
 import { TopLayout } from '@/components/layout/TopLayout';
 import { InputPage } from '@/components/pages/InputPage';
-import { Outlet, Route, Routes } from 'react-router-dom';
 
 export const RouterConfig = () => {
   return (

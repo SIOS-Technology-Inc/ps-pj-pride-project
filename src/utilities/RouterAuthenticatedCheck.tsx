@@ -1,8 +1,13 @@
-import { onAuthStateChanged, User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { auth } from '../auth/authFirebase';
-import { LoadingComponent } from './LoadingComponent';
+
+import { onAuthStateChanged, User } from 'firebase/auth';
+
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+
+import { auth } from '../auth/authFirebase';
+
+import { LoadingComponent } from './LoadingComponent';
+
 
 type Props = {
   children: React.ReactNode;

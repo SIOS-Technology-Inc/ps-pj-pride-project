@@ -8,7 +8,7 @@ export const ButtonComponent = (props: ButtonComponentProps) => {
     <>
       <button
         type={onClick ? 'button' : 'submit'}
-        className="flex items-center justify-center border-2 border-gray text-lg py-3 px-8"
+        className="flex items-center justify-center border-2 border-gray py-3 px-8 text-lg"
         onClick={onClick}
       >
         {label}
