@@ -9,7 +9,7 @@ export const HeaderComponent = () => {
   const { singOutAction, user } = useFirebaseAuth();
   return (
     <>
-      <header className="flex flex-row justify-between items-end px-[30px] border-b-2 border-gray py-3">
+      <header className="w-full flex flex-row justify-between items-end px-[30px] border-b-2 border-gray py-3">
         <img src={Logo} alt="logo" />
         <div className="flex flex-row items-center gap-2 ">
           <img src={user.photoURL} alt="" className="w-10 h-10 object-contain rounded-full" />
@@ -27,7 +27,7 @@ export const HeaderComponent = () => {
 export const FooterComponent = () => {
   return (
     <>
-      <footer className="flex flex-row h-36 bg-gray justify-end px-[30px]">
+      <footer className="w-full flex flex-row h-36 bg-gray justify-end px-[30px]">
         <img src={FooterLogoFox1} className="w-32 object-contain" alt="" />
         <img src={FooterLogoFox2} className="w-32 object-contain" alt="" />
       </footer>
