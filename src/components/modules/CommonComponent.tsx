@@ -1,21 +1,21 @@
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import Logo from 'src/assets/logo.svg';
+import { FiLogOut } from 'react-icons/fi';
 import FooterLogoFox1 from 'src/assets/fox1.png';
 import FooterLogoFox2 from 'src/assets/fox2.png';
+import Logo from 'src/assets/logo.svg';
 
-import { FiLogOut } from 'react-icons/fi';
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 export const HeaderComponent = () => {
   const { singOutAction, user } = useFirebaseAuth();
   return (
     <>
-      <header className="w-full flex flex-row justify-between items-end px-[30px] border-b-2 border-gray py-3">
+      <header className="flex w-full flex-row items-end justify-between border-b-2 border-gray px-[30px] py-3">
         <img src={Logo} alt="logo" />
         <div className="flex flex-row items-center gap-2 ">
-          <img src={user.photoURL} alt="" className="w-10 h-10 object-contain rounded-full" />
+          <img src={user.photoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
           <span className="text-lg font-bold">{user.displayName}でログイン中</span>
           <FiLogOut
-            className="h-8 w-auto hover:cursor-pointer rounded-full hover:bg-gray p-2 transition-colors hover:text-white"
+            className="h-8 w-auto rounded-full p-2 transition-colors hover:cursor-pointer hover:bg-gray hover:text-white"
             onClick={singOutAction}
           />
         </div>
@@ -27,7 +27,7 @@ export const HeaderComponent = () => {
 export const FooterComponent = () => {
   return (
     <>
-      <footer className="w-full flex flex-row h-36 bg-gray justify-end px-[30px]">
+      <footer className="flex h-36 w-full flex-row justify-end bg-gray px-[30px]">
         <img src={FooterLogoFox1} className="w-32 object-contain" alt="" />
         <img src={FooterLogoFox2} className="w-32 object-contain" alt="" />
       </footer>

@@ -1,6 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { InputItemComponent, TextAreaItemComponent } from './InputItemComponent';
+
 import { ButtonComponent } from '../ButtonComponent';
+
+import { InputItemComponent, TextAreaItemComponent } from './InputItemComponent';
 
 type FormValuesProps = {
   title: string;
@@ -26,7 +28,7 @@ export const InputBoardComponent = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full flex  flex-col max-w-xl gap-5 p-4 shadow-2xl rounded"
+        className="flex w-full  max-w-xl flex-col gap-5 rounded p-4 shadow-2xl"
       >
         <InputItemComponent
           name={'title'}

@@ -1,13 +1,14 @@
 import { Outlet } from 'react-router-dom';
+
 import { FooterComponent, HeaderComponent } from '../modules/CommonComponent';
 import { MenuComponent } from '../modules/MenuComponent';
 
 export const TopLayout = () => {
   return (
     <>
-      <section className="flex flex-col w-full h-full font-zen min-h-screen items-center">
+      <section className="flex h-full min-h-screen w-full flex-col items-center font-zen">
         <HeaderComponent />
-        <main className="w-full max-w-3xl flex-col px-[30px] items-center flex flex-grow mt-2 gap-3">
+        <main className="my-2 flex w-full max-w-4xl grow flex-col items-center gap-3 ">
           <MenuComponent />
           <Outlet />
         </main>
