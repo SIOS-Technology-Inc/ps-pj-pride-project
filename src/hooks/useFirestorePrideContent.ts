@@ -13,7 +13,7 @@ import { PrideContentType } from '@/types/contentsType';
 
 export const useFirestorePrideContent = () => {
   const today = new Date();
-  const collectionName = today.getFullYear() + '-' + (today.getMonth() + 1) + 'pride';
+  const collectionName = today.getFullYear() + '-' + (today.getMonth() + 1) + '-pride';
 
   type PrideContentFirestoreDataType = {
     uid?: string;

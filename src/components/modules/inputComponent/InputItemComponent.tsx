@@ -9,7 +9,9 @@ type InputItemComponentProps<T extends FieldValues> = UseControllerProps<T> & La
 
 export const InputItemComponent = <T extends FieldValues>(props: InputItemComponentProps<T>) => {
   const { label, validation, name, control, rules } = props;
-  const { field } = useController<T>({ name, control, rules });
+  const { field, fieldState } = useController<T>({ name, control, rules });
+  const { error } = fieldState;
+
   return (
     <>
       <div className="flex w-full flex-col">
@@ -18,13 +20,16 @@ export const InputItemComponent = <T extends FieldValues>(props: InputItemCompon
           <span>{validation}</span>
         </div>
         <input type="text" {...field} className="border border-gray py-1 px-2 text-lg" />
+        <span className="h-4 w-full text-xs text-red-600">{error ? error.message : ''}</span>
       </div>
     </>
   );
 };
 export const TextAreaItemComponent = <T extends FieldValues>(props: InputItemComponentProps<T>) => {
   const { label, validation, name, control, rules } = props;
-  const { field } = useController<T>({ name, control, rules });
+  const { field, fieldState } = useController<T>({ name, control, rules });
+  const { error } = fieldState;
+
   return (
     <>
       <div className="flex w-full flex-col">
@@ -33,6 +38,7 @@ export const TextAreaItemComponent = <T extends FieldValues>(props: InputItemCom
           <span>{validation}</span>
         </div>
         <textarea {...field} className="resize-none border border-gray py-1 px-2 text-lg" />
+        <span className="h-4 w-full text-xs text-red-600">{error ? error.message : ''}</span>
       </div>
     </>
   );
