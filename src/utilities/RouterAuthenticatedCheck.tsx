@@ -1,8 +1,12 @@
-import { onAuthStateChanged, User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import { auth } from '../auth/authFirebase';
-import { LoadingComponent } from './LoadingComponent';
+
+import { onAuthStateChanged, User } from 'firebase/auth';
+
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+
+import { auth } from '../auth/authFirebase';
+
+import { LoadingComponent } from './LoadingComponent';
 
 type Props = {
   children: React.ReactNode;
@@ -10,14 +14,14 @@ type Props = {
 
 export const RouterAuthenticatedCheck = (props: Props) => {
   const { children } = props;
-  const { signInAction, uid } = useFirebaseAuth();
+  const { signInAction } = useFirebaseAuth();
 
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (getAuthUser: User | null) => {
       if (!getAuthUser) signInAction();
-      console.log(getAuthUser);
+      console.info('auth処理', getAuthUser);
 
       setLoading(true);
     });

@@ -1,13 +1,15 @@
 import { Outlet } from 'react-router-dom';
+
 import { FooterComponent, HeaderComponent } from '../modules/CommonComponent';
+import { MenuComponent } from '../modules/MenuComponent';
 
 export const TopLayout = () => {
   return (
     <>
-      <section className="flex flex-col w-full h-full  font-kurenaido min-h-screen">
+      <section className="flex h-full min-h-screen w-full flex-col items-center font-zen">
         <HeaderComponent />
-        <main className="flex-col px-[30px] items-center flex flex-grow mt-2">
-          <div className="flex flex-row justify-around w-full">link達を書くところ</div>
+        <main className="my-2 flex w-full max-w-4xl grow flex-col items-center gap-3 ">
+          <MenuComponent />
           <Outlet />
         </main>
         <FooterComponent />

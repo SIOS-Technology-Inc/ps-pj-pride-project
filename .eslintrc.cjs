@@ -28,6 +28,7 @@ module.exports = {
     'unused-imports',
   ],
   rules: {
+    'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'import/order': [
       'error',
@@ -78,6 +79,9 @@ module.exports = {
   settings: {
     react: {
       version: 'detect',
+    },
+    tailwindcss: {
+      config: 'tailwind.config.cjs',
     },
   },
 };
