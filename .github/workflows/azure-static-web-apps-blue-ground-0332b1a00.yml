@@ -14,6 +14,14 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment: static-web-apps
+    env:
+      VITE_FB_APIKEY: ${{ secret.VITE_FB_APIKEY }}
+      VITE_FB_AUTHDOMAIN: ${{ secret.VITE_FB_AUTHDOMAIN }}
+      VITE_FB_PROJECT_ID: ${{ secret.VITE_FB_PROJECT_ID }}
+      VITE_FB_STORAGE_BUCKET: ${{ secret.VITE_FB_STORAGE_BUCKET }}
+      VITE_FB_MESSAGEING_SENDER_ID: ${{ secret.VITE_FB_MESSAGEING_SENDER_ID }}
+      VITE_FB_APP_ID: ${{ secret.VITE_FB_APP_ID }}
     steps:
       - uses: actions/checkout@v3
         with:
