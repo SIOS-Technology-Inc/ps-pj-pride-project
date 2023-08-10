@@ -19,15 +19,13 @@ export const RouterAuthenticatedCheck = (props: Props) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (getAuthUser: User | null) => {
-      if (!getAuthUser) {
-        signInAction();
-      }
+      if (getAuthUser == null) signInAction();
       setLoading(false);
     });
     return unsubscribe;
   });
 
-  if (loading) return <LoadingComponent />;
+  if (loading || auth.currentUser == null) return <LoadingComponent />;
 
   return <>{children}</>;
 };
