@@ -15,6 +15,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+provider.setCustomParameters({
+  hd: 'sios.com',
+});
 
 const db = getFirestore(app);
 

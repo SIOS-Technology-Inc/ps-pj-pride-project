@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 
 import { RouterConfig } from './router/RouterConfig';
-import { RouterAuthenticatedCheck } from './utilities/RouterAuthenticatedCheck';
+import { RouterAuthenticatedCheck } from './router/RouterAuthenticatedCheck';
 
 function App() {
   return (

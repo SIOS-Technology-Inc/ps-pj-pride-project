@@ -14,6 +14,7 @@ export const useFirebaseAuth = () => {
   const singOutAction = () => {
     signOut(auth);
   };
+  const isAuthenticated = useMemo(() => (auth.currentUser ? true : false), []);
   const uid: string = useMemo(() => (auth.currentUser ? auth.currentUser.uid : ''), []);
   const user: firebaseAuthType = useMemo(() => {
     if (auth.currentUser) {
@@ -29,5 +30,5 @@ export const useFirebaseAuth = () => {
     }
   }, []);
 
-  return { signInAction, singOutAction, uid, user };
+  return { signInAction, singOutAction, uid, user, isAuthenticated };
 };
