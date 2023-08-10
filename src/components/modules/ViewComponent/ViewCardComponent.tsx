@@ -3,7 +3,11 @@ import { PrideContentType } from '@/types/contentsType';
 
 import { ThumbsUpButton } from '../ButtonComponent';
 
-import { ViewMultiLineImgListContent, ViewOneLineContent } from './ViewContentComponent';
+import {
+  ViewMultiLineContent,
+  ViewMultiLineImgListContent,
+  ViewOneLineContent,
+} from './ViewContentComponent';
 
 type ViewCardComponentProps = {
   prideContent: PrideContentType;
@@ -43,7 +47,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
 
 export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const { userName, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, thumbsUsers, title, userPhotoURL, serviceName, customerName } = prideContent;
 
   const { user } = useFirebaseAuth();
 
@@ -59,6 +63,10 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
             <h2 className="grow text-2xl">{title}</h2>
           </div>
           <ThumbsUpButton onClick={() => onClick()} disable={thumbsUsers.includes(user.photoURL)} />
+        </div>
+        <div className="flex w-full flex-row gap-2">
+          <ViewMultiLineContent label="対象サービス" content={serviceName} />
+          <ViewMultiLineContent label="顧客名・社内検証等" content={customerName} />
         </div>
         <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
       </div>

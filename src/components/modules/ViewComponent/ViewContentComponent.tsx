@@ -17,7 +17,7 @@ export const ViewMultiLineContent = (props: ViewContentProps) => {
   const { content, label } = props;
   return (
     <>
-      <ul className="flex flex-col gap-1 text-lg">
+      <ul className="flex grow flex-col gap-1 text-lg">
         <li className="text-gray">{label}</li>
         <li className="text-black">{content}</li>
       </ul>
