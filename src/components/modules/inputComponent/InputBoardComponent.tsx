@@ -4,7 +4,7 @@ import { InputFormPrideContentType } from '@/types/contentsType';
 
 import { ButtonComponent } from '../ButtonComponent';
 
-import { InputItemComponent, TextAreaItemComponent } from './InputItemComponent';
+import { InputItemComponent } from './InputItemComponent';
 
 type InputBoardComponentProps = {
   initializeData: InputFormPrideContentType;
@@ -57,16 +57,7 @@ export const InputBoardComponent = (props: InputBoardComponentProps) => {
           }}
           validation="10文字以内"
         />
-        <TextAreaItemComponent
-          name={'sentence'}
-          control={control}
-          rules={{
-            required: { value: true, message: '一言でもよいよ？' },
-            maxLength: { value: 20, message: '文字数は50文字以内です。' },
-          }}
-          label="チャレンジ内容"
-          validation="50文字以内"
-        />
+
         <ButtonComponent label="投稿" />
       </form>
     </>

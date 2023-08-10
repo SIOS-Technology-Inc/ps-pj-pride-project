@@ -16,8 +16,7 @@ type ViewCardComponentProps = {
 
 export const ViewCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, sentence, userPhotoURL } =
-    prideContent;
+  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
 
   const { user } = useFirebaseAuth();
 
@@ -37,7 +36,6 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
             <ViewOneLineContent label="対象サービス" content={serviceName} />
             <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
           </div>
-          <span className="text-lg">{sentence}</span>
           <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
         </div>
       </div>

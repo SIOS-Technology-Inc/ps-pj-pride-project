@@ -14,7 +14,6 @@ export const InputPage = () => {
 
   const InitializeData: InputFormPrideContentType = {
     customerName: '',
-    sentence: '',
     serviceName: '',
     title: '',
   };
