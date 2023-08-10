@@ -6,7 +6,7 @@ export const ViewOneLineContent = (props: ViewContentProps) => {
   const { content, label } = props;
   return (
     <>
-      <ul className="flex flex-row justify-between text-lg">
+      <ul className="flex grow flex-row justify-between text-lg">
         <li className="text-gray">{label}</li>
         <li className="text-black">{content}</li>
       </ul>
@@ -32,7 +32,7 @@ export const ViewMultiLineImgListContent = (props: ViewMultiLineImgListContentTy
   const { contents, label } = props;
   return (
     <>
-      <ul className="flex flex-col gap-1 text-lg">
+      <ul className="flex grow flex-col gap-1 text-lg">
         <li className="text-gray">{label}</li>
         <li className="flex h-auto min-h-[40px] flex-row flex-wrap gap-3">
           {contents.length == 0 ? (
