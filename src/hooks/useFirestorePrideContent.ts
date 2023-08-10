@@ -33,7 +33,6 @@ export const useFirestorePrideContent = () => {
         pride: {
           title: data.title,
           customerName: data.customerName,
-          sentence: data.sentence,
           serviceName: data.serviceName,
           thumbsUsers: data.thumbsUsers,
           userName: data.userName,
