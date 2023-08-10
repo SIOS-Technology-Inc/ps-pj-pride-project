@@ -13,21 +13,21 @@ type Props = {
 
 export const RouterAuthenticatedCheck = (props: Props) => {
   const { children } = props;
-  const { signInAction, isAuthenticated } = useFirebaseAuth();
+  const { signInAction } = useFirebaseAuth();
 
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (getAuthUser: User | null) => {
-      if (!getAuthUser) signInAction();
-      console.info('auth処理', getAuthUser);
-
+      if (!getAuthUser) {
+        signInAction();
+      }
       setLoading(false);
     });
     return unsubscribe;
   });
 
-  if (loading || !isAuthenticated) return <LoadingComponent />;
+  if (loading) return <LoadingComponent />;
 
   return <>{children}</>;
 };
