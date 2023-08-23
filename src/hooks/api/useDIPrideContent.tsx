@@ -3,6 +3,8 @@ import { useFirestorePrideContent } from '../useFirestorePrideContent';
 export const useDIPrideContent = () => {
   const {
     createPride,
+    updatePride,
+    deletePride,
     pushLikeForPride,
     readThisMonthOwnPrideContentList,
     readThisMonthPrideList,
@@ -11,6 +13,8 @@ export const useDIPrideContent = () => {
 
   return {
     createPride,
+    updatePride,
+    deletePride,
     pushLikeForPride,
     readThisMonthOwnPrideContentList,
     readThisMonthPrideList,

@@ -5,6 +5,7 @@ import {
   SnapshotOptions,
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -70,6 +71,16 @@ export const useFirestorePrideContent = () => {
 
     return snapshot.docs.map((doc) => doc.data());
   };
+  const updatePride = async (uid: string, content: PrideContentType): Promise<void> => {
+    const updateDocRef = doc(db, collectionName, uid);
+    await updateDoc(updateDocRef, {
+      ...content,
+    });
+  };
+  const deletePride = async (uid: string): Promise<void> => {
+    const updateDocRef = doc(db, collectionName, uid);
+    await deleteDoc(updateDocRef);
+  };
 
   const pushLikeForPride = async (uid: string, photoURL: string): Promise<void> => {
     const docRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
@@ -89,6 +100,8 @@ export const useFirestorePrideContent = () => {
 
   return {
     createPride,
+    updatePride,
+    deletePride,
     readThisMonthPrideList,
     pushLikeForPride,
     readThisMonthRankingTop3,
