@@ -10,7 +10,7 @@ export const InputPage = () => {
   const month = date.getMonth() + 1;
 
   const { createPride } = useFirestorePrideContent();
-  const { user } = useFirebaseAuth();
+  const { user, uid } = useFirebaseAuth();
 
   const InitializeData: InputFormPrideContentType = {
     customerName: '',
@@ -20,6 +20,7 @@ export const InputPage = () => {
   const onSubmit = (content: InputFormPrideContentType) => {
     const submitData: PrideContentType = {
       ...content,
+      uid: uid,
       userName: user.displayName,
       userPhotoURL: user.photoURL,
       thumbsUsers: [],

@@ -1,4 +1,5 @@
 export type PrideContentType = {
+  uid: string;
   userName: string;
   userPhotoURL: string;
   title: string;

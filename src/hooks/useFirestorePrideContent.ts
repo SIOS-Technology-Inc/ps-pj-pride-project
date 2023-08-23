@@ -31,6 +31,7 @@ export const useFirestorePrideContent = () => {
       return {
         uid: snapshot.id,
         pride: {
+          uid: data.uid,
           title: data.title,
           customerName: data.customerName,
           serviceName: data.serviceName,

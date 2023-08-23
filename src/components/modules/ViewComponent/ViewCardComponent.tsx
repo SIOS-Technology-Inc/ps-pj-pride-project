@@ -16,9 +16,10 @@ type ViewCardComponentProps = {
 
 export const ViewCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL, uid } =
+    prideContent;
 
-  const { user } = useFirebaseAuth();
+  const { uid: userId } = useFirebaseAuth();
 
   return (
     <>
@@ -28,7 +29,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
             <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
             <span className="text-lg ">{userName}</span>
           </div>
-          <ThumbsUpButton onClick={() => onClick()} disable={thumbsUsers.includes(user.photoURL)} />
+          <ThumbsUpButton onClick={() => onClick()} disable={uid == userId} />
         </div>
         <h2 className="text-2xl">{title}</h2>
         <div className="flex flex-col gap-4">
