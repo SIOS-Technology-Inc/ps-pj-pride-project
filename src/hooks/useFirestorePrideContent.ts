@@ -8,9 +8,12 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
+  query,
   updateDoc,
+  where,
 } from 'firebase/firestore';
-import useSWR from 'swr';
 
 import { db } from '@/auth/authFirebase';
 import { PrideContentFirestoreDataType, PrideContentType } from '@/types/contentsType';
@@ -51,17 +54,32 @@ export const useFirestorePrideContent = () => {
     const snapshot = await getDocs(collRef);
     return snapshot.docs.map((doc) => doc.data());
   };
+  const readThisMonthRankingTop3 = async (): Promise<PrideContentFirestoreDataType[]> => {
+    const collRef = collection(db, collectionName).withConverter(prideDataConverter);
+    const queryRef = query(collRef, orderBy('thumbsUsers', 'desc'), limit(3));
+    const snapshot = await getDocs(queryRef);
+    return snapshot.docs.map((doc) => doc.data());
+  };
+
+  const readThisMonthOwnPrideContentList = async (
+    uid: string
+  ): Promise<PrideContentFirestoreDataType[]> => {
+    const collRef = collection(db, collectionName).withConverter(prideDataConverter);
+    const queryRef = query(collRef, where('uid', '==', uid));
+    const snapshot = await getDocs(queryRef);
+
+    return snapshot.docs.map((doc) => doc.data());
+  };
+
   const pushLikeForPride = async (uid: string, photoURL: string): Promise<void> => {
     const docRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
     const snapshot = await getDoc(docRef);
 
     const data = snapshot.data();
-    console.log(data);
 
     if (!data) return;
     const thumbsUsers = data.pride.thumbsUsers;
     const registerThumbsUser = Array.from(new Set([...thumbsUsers, photoURL]));
-    console.log(registerThumbsUser);
 
     const updateDocRef = doc(db, collectionName, uid);
     await updateDoc(updateDocRef, {
@@ -69,17 +87,11 @@ export const useFirestorePrideContent = () => {
     });
   };
 
-  const {
-    data: prideContentList,
-    mutate: prideContentMutate,
-    isLoading: isLoadingPrideContent,
-  } = useSWR('prideContent', () => readThisMonthPrideList());
-
   return {
     createPride,
-    prideContentList,
-    prideContentMutate,
-    isLoadingPrideContent,
+    readThisMonthPrideList,
     pushLikeForPride,
+    readThisMonthRankingTop3,
+    readThisMonthOwnPrideContentList,
   };
 };

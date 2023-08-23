@@ -2,8 +2,9 @@ import { useMemo, useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
+import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import { useFetchThisMonthPrideList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { useFirestorePrideContent } from '@/hooks/useFirestorePrideContent';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { TitleComponent } from '../modules/TitleComponent';
@@ -17,8 +18,9 @@ export const ThumbsUpPage = () => {
   const month = date.getMonth() + 1;
 
   const { user } = useFirebaseAuth();
-  const { prideContentList, isLoadingPrideContent, prideContentMutate, pushLikeForPride } =
-    useFirestorePrideContent();
+  const { pushLikeForPride } = useDIPrideContent();
+  const { prideContentList, isLoadingPrideContent, prideContentMutate } =
+    useFetchThisMonthPrideList();
 
   const onClickThumbsUpButton = async (uid: string) => {
     console.log(uid);

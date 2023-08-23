@@ -1,6 +1,11 @@
+import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import {
+  useFetchThisMonthOwnPrideContentList,
+  useFetchThisMonthRankingTop3,
+} from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { useFirestorePrideContent } from '@/hooks/useFirestorePrideContent';
 import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { TitleComponent } from '../modules/TitleComponent';
 import { InputBoardComponent } from '../modules/inputComponent/InputBoardComponent';
@@ -9,8 +14,12 @@ export const InputPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { createPride } = useFirestorePrideContent();
   const { user, uid } = useFirebaseAuth();
+  const { createPride } = useDIPrideContent();
+
+  const { prideContentRankingList, isLoadingPrideContentRanking } = useFetchThisMonthRankingTop3();
+  const { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate } =
+    useFetchThisMonthOwnPrideContentList(uid);
 
   const InitializeData: InputFormPrideContentType = {
     customerName: '',
@@ -26,8 +35,12 @@ export const InputPage = () => {
       thumbsUsers: [],
     };
     createPride(submitData);
+    prideContentOwnListMutate();
   };
 
+  if (isLoadingPrideContentRanking || isLoadingPrideContentOwnList) return <LoadingComponent />;
+  console.log(prideContentRankingList);
+  console.log(prideContentOwnList);
   return (
     <>
       <TitleComponent label={month + '月の自慢を書こう'} />
