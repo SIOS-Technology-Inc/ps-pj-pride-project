@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import EvaluationLinkImage from 'src/assets/evaluation-link.png';
 import InputLinkImage from 'src/assets/input-link.png';
+import TopLinkImage from 'src/assets/top-link.png';
 
 export const MenuComponent = () => {
   const location = useLocation();
@@ -12,6 +13,9 @@ export const MenuComponent = () => {
     <>
       <div className="flex w-full flex-row justify-around">
         <Link to={'/'} className={pathName == '/' ? '' : 'opacity-40'}>
+          <img src={TopLinkImage} alt="" className="w-32 object-contain hover:cursor-pointer" />
+        </Link>
+        <Link to={'/input'} className={pathName == '/input' ? '' : 'opacity-40'}>
           <img src={InputLinkImage} alt="" className="w-32 object-contain hover:cursor-pointer" />
         </Link>
         <Link to={'/thumbs-up'} className={pathName == '/thumbs-up' ? '' : 'opacity-40'}>
