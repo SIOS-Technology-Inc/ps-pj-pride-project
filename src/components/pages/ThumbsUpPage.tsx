@@ -28,10 +28,10 @@ export const ThumbsUpPage = () => {
     prideContentMutate();
   };
 
-  const [viewType, setViewType] = useState<'card' | 'list'>('card');
+  const [viewType, setViewType] = useState<'card' | 'list'>('list');
   const viewCss: { card: string; list: string } = useMemo(() => {
-    if (viewType == 'card') return { card: 'opacity-40', list: '' };
-    if (viewType == 'list') return { card: '', list: 'opacity-40' };
+    if (viewType == 'card') return { card: '', list: 'opacity-40' };
+    if (viewType == 'list') return { card: 'opacity-40', list: '' };
     return { card: '', list: '' };
   }, [viewType]);
 

@@ -11,10 +11,10 @@ export const MenuComponent = () => {
   return (
     <>
       <div className="flex w-full flex-row justify-around">
-        <Link to={'/'} className={pathName == '/' ? 'opacity-40' : ''}>
+        <Link to={'/'} className={pathName == '/' ? '' : 'opacity-40'}>
           <img src={InputLinkImage} alt="" className="w-32 object-contain hover:cursor-pointer" />
         </Link>
-        <Link to={'/thumbs-up'} className={pathName == '/thumbs-up' ? 'opacity-40' : ''}>
+        <Link to={'/thumbs-up'} className={pathName == '/thumbs-up' ? '' : 'opacity-40'}>
           <img
             src={EvaluationLinkImage}
             className="w-32 object-contain hover:cursor-pointer"
