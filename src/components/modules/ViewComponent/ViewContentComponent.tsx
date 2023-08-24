@@ -36,7 +36,7 @@ export const ViewMultiLineImgListContent = (props: ViewMultiLineImgListContentTy
         <li className="text-gray">{label}</li>
         <li className="flex h-auto min-h-[40px] flex-row flex-wrap gap-3">
           {contents.length == 0 ? (
-            <span className="flex w-full items-center justify-center">いいねがほしいよ～</span>
+            <span className="flex w-full items-center justify-start">いいねがほしいよ～</span>
           ) : (
             contents.map((content, index) => (
               <img
