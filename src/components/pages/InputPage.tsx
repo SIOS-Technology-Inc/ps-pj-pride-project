@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
-import {
-  useFetchThisMonthOwnPrideContentList,
-  useFetchThisMonthRankingTop3,
-} from '@/hooks/api/useReadPrideContent';
+import { useFetchThisMonthOwnPrideContentList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
@@ -26,7 +23,6 @@ export const InputPage = () => {
   const { user, uid } = useFirebaseAuth();
   const { createPride, deletePride, updatePride } = useDIPrideContent();
 
-  const { prideContentRankingList, isLoadingPrideContentRanking } = useFetchThisMonthRankingTop3();
   const { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate } =
     useFetchThisMonthOwnPrideContentList(uid);
 
@@ -75,8 +71,7 @@ export const InputPage = () => {
     reset();
   };
 
-  if (isLoadingPrideContentRanking || isLoadingPrideContentOwnList) return <LoadingComponent />;
-  if (!prideContentOwnList || !prideContentRankingList) return <LoadingComponent />;
+  if (isLoadingPrideContentOwnList || !prideContentOwnList) return <LoadingComponent />;
 
   return (
     <>
