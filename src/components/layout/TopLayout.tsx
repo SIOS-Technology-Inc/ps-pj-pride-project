@@ -8,7 +8,7 @@ export const TopLayout = () => {
     <>
       <section className="flex h-full min-h-screen w-full flex-col items-center font-zen">
         <HeaderComponent />
-        <main className="my-10 flex w-full max-w-4xl grow flex-col items-center gap-3 ">
+        <main className="my-10 flex w-full max-w-5xl grow flex-col items-center gap-3 ">
           <MenuComponent />
           <Outlet />
         </main>
