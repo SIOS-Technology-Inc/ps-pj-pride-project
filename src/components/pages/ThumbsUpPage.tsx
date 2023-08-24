@@ -2,8 +2,9 @@ import { useMemo, useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
+import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import { useFetchThisMonthPrideList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { useFirestorePrideContent } from '@/hooks/useFirestorePrideContent';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { TitleComponent } from '../modules/TitleComponent';
@@ -17,8 +18,9 @@ export const ThumbsUpPage = () => {
   const month = date.getMonth() + 1;
 
   const { user } = useFirebaseAuth();
-  const { prideContentList, isLoadingPrideContent, prideContentMutate, pushLikeForPride } =
-    useFirestorePrideContent();
+  const { pushLikeForPride } = useDIPrideContent();
+  const { prideContentList, isLoadingPrideContent, prideContentMutate } =
+    useFetchThisMonthPrideList();
 
   const onClickThumbsUpButton = async (uid: string) => {
     console.log(uid);
@@ -26,10 +28,10 @@ export const ThumbsUpPage = () => {
     prideContentMutate();
   };
 
-  const [viewType, setViewType] = useState<'card' | 'list'>('card');
+  const [viewType, setViewType] = useState<'card' | 'list'>('list');
   const viewCss: { card: string; list: string } = useMemo(() => {
-    if (viewType == 'card') return { card: 'opacity-40', list: '' };
-    if (viewType == 'list') return { card: '', list: 'opacity-40' };
+    if (viewType == 'card') return { card: '', list: 'opacity-40' };
+    if (viewType == 'list') return { card: 'opacity-40', list: '' };
     return { card: '', list: '' };
   }, [viewType]);
 

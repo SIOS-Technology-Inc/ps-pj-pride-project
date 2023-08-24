@@ -45,3 +45,4 @@ export const TextAreaItemComponent = <T extends FieldValues>(props: InputItemCom
 };
 
 // https://dev.to/texmeijin/component-design-idea-using-react-hook-form-v7-ie0
+// https://zenn.dev/manalink_dev/articles/manalink-react-hook-form-v7

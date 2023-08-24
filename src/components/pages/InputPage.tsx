@@ -1,36 +1,135 @@
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { useFirestorePrideContent } from '@/hooks/useFirestorePrideContent';
-import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import {
+  useFetchThisMonthOwnPrideContentList,
+  useFetchThisMonthRankingTop3,
+} from '@/hooks/api/useReadPrideContent';
+import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+import { LoadingComponent } from '@/utilities/LoadingComponent';
+
+import { ButtonComponent } from '../modules/ButtonComponent';
 import { TitleComponent } from '../modules/TitleComponent';
-import { InputBoardComponent } from '../modules/inputComponent/InputBoardComponent';
+import { OwnViewLandscapeCardComponent } from '../modules/ViewComponent/ViewCardComponent';
+import { InputItemComponent } from '../modules/inputComponent/InputItemComponent';
+import { TabMenuContent } from '../modules/tabContent/TabMenuContent';
 
 export const InputPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { createPride } = useFirestorePrideContent();
-  const { user } = useFirebaseAuth();
+  const [isNewContent, setIsNewContent] = useState<boolean>(true);
+  const [editContentUid, setEditContentUid] = useState<string>('');
 
-  const InitializeData: InputFormPrideContentType = {
-    customerName: '',
-    serviceName: '',
-    title: '',
+  const { user, uid } = useFirebaseAuth();
+  const { createPride, deletePride, updatePride } = useDIPrideContent();
+
+  const { prideContentRankingList, isLoadingPrideContentRanking } = useFetchThisMonthRankingTop3();
+  const { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate } =
+    useFetchThisMonthOwnPrideContentList(uid);
+
+  const { handleSubmit, control, reset, setValue } = useForm<InputFormPrideContentType>({
+    defaultValues: {
+      customerName: '',
+      serviceName: '',
+      title: '',
+    },
+  });
+
+  const onClickMenuNewContent = () => {
+    setIsNewContent(true);
+    reset();
   };
-  const onSubmit = (content: InputFormPrideContentType) => {
+
+  const onClickEdit = async (uid: string, prideContent: PrideContentType) => {
+    setIsNewContent(false);
+
+    setEditContentUid(uid);
+    setValue('customerName', prideContent.customerName);
+    setValue('serviceName', prideContent.serviceName);
+    setValue('title', prideContent.title);
+  };
+
+  const onClickDelete = async (uid: string) => {
+    deletePride(uid);
+    prideContentOwnListMutate();
+  };
+
+  const onSubmit: SubmitHandler<InputFormPrideContentType> = (data: InputFormPrideContentType) => {
     const submitData: PrideContentType = {
-      ...content,
+      ...data,
+      uid: uid,
       userName: user.displayName,
       userPhotoURL: user.photoURL,
       thumbsUsers: [],
     };
-    createPride(submitData);
+    if (isNewContent) {
+      createPride(submitData);
+    } else {
+      updatePride(editContentUid, submitData);
+    }
+    prideContentOwnListMutate();
+    setIsNewContent(true);
+    reset();
   };
+
+  if (isLoadingPrideContentRanking || isLoadingPrideContentOwnList) return <LoadingComponent />;
+  if (!prideContentOwnList || !prideContentRankingList) return <LoadingComponent />;
 
   return (
     <>
       <TitleComponent label={month + '月の自慢を書こう'} />
-      <InputBoardComponent initializeData={InitializeData} onSubmitParentFunction={onSubmit} />
+      <div className="flex w-full items-start gap-3">
+        <div className="flex w-full max-w-sm flex-col gap-5 rounded p-4 shadow-2xl">
+          <TabMenuContent isNewContent={isNewContent} onClickNewContent={onClickMenuNewContent} />
+          <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-5">
+            <InputItemComponent
+              name={'title'}
+              control={control}
+              rules={{
+                required: { value: true, message: 'アピールは書いてね♡' },
+                maxLength: { value: 20, message: '文字数は20文字以内です。' },
+              }}
+              label="アピールポイント"
+              validation="20文字以内"
+            />
+            <InputItemComponent
+              name={'serviceName'}
+              control={control}
+              rules={{
+                required: { value: true, message: 'これは難しい' },
+                maxLength: { value: 20, message: '文字数は10文字以内です。' },
+              }}
+              label="対象サービス"
+              validation="10文字以内"
+            />
+            <InputItemComponent
+              name={'customerName'}
+              control={control}
+              label="顧客名・社内検証等"
+              rules={{
+                required: { value: true, message: 'これは埋めときましょう' },
+                maxLength: { value: 10, message: '文字数は10文字以内です。' },
+              }}
+              validation="10文字以内"
+            />
+
+            <ButtonComponent label="投稿" />
+          </form>
+        </div>
+        <div className="flex w-full flex-col gap-10">
+          {prideContentOwnList.map((content) => (
+            <OwnViewLandscapeCardComponent
+              key={content.uid}
+              prideContent={content.pride}
+              onClickDelete={() => onClickDelete(content.uid)}
+              onClickEdit={() => onClickEdit(content.uid, content.pride)}
+            />
+          ))}
+        </div>
+      </div>
     </>
   );
 };
