@@ -19,6 +19,16 @@ export const InputPage = () => {
 
   const [isNewContent, setIsNewContent] = useState<boolean>(true);
   const [editContentUid, setEditContentUid] = useState<string>('');
+  const initializePrideContent: PrideContentType = {
+    customerName: '',
+    serviceName: '',
+    thumbsUsers: [],
+    title: '',
+    uid: '',
+    userName: '',
+    userPhotoURL: '',
+  };
+  const [editData, setEditData] = useState<PrideContentType>(initializePrideContent);
 
   const { user, uid } = useFirebaseAuth();
   const { createPride, deletePride, updatePride } = useDIPrideContent();
@@ -43,6 +53,7 @@ export const InputPage = () => {
     setIsNewContent(false);
 
     setEditContentUid(uid);
+    setEditData(prideContent);
     setValue('customerName', prideContent.customerName);
     setValue('serviceName', prideContent.serviceName);
     setValue('title', prideContent.title);
@@ -53,20 +64,27 @@ export const InputPage = () => {
     prideContentOwnListMutate();
   };
 
-  const onSubmit: SubmitHandler<InputFormPrideContentType> = (data: InputFormPrideContentType) => {
-    const submitData: PrideContentType = {
-      ...data,
-      uid: uid,
-      userName: user.displayName,
-      userPhotoURL: user.photoURL,
-      thumbsUsers: [],
-    };
+  const onSubmit: SubmitHandler<InputFormPrideContentType> = async (
+    data: InputFormPrideContentType
+  ) => {
     if (isNewContent) {
-      createPride(submitData);
+      const submitData: PrideContentType = {
+        ...data,
+        uid: uid,
+        userName: user.displayName,
+        userPhotoURL: user.photoURL,
+        thumbsUsers: [],
+      };
+      await createPride(submitData);
     } else {
-      updatePride(editContentUid, submitData);
+      const submitData: PrideContentType = {
+        ...editData,
+        ...data,
+      };
+      await updatePride(editContentUid, submitData);
     }
-    prideContentOwnListMutate();
+    await prideContentOwnListMutate();
+    setEditData(initializePrideContent);
     setIsNewContent(true);
     reset();
   };
