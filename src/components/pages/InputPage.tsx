@@ -113,7 +113,7 @@ export const InputPage = () => {
               control={control}
               rules={{
                 required: { value: true, message: 'これは難しい' },
-                maxLength: { value: 20, message: '文字数は10文字以内です。' },
+                maxLength: { value: 10, message: '文字数は10文字以内です。' },
               }}
               label="対象サービス"
               validation="10文字以内"
