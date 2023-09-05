@@ -3,15 +3,16 @@ import { useRef } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { PrideContentType } from '@/types/contentsType';
 
-import { ThumbsUpButton } from '../ButtonComponent';
+import { ThumbsUpButton } from 'modules/ButtonComponent';
 
 import {
   ViewMultiLineContent,
   ViewMultiLineImgListContent,
   ViewOneLineContent,
 } from './ViewContentComponent';
+
+import type { PrideContentType } from '@/types/contentsType';
 
 type ViewCardComponentProps = {
   prideContent: PrideContentType;

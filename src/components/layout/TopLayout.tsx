@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { FooterComponent, HeaderComponent } from '../modules/CommonComponent';
-import { MenuComponent } from '../modules/MenuComponent';
+import { FooterComponent, HeaderComponent } from 'modules/CommonComponent';
+import { MenuComponent } from 'modules/MenuComponent';
 
 export const TopLayout = () => {
   return (

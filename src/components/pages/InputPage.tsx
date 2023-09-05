@@ -4,14 +4,16 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
 import { useFetchThisMonthOwnPrideContentList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+
+import { ButtonComponent } from 'modules/ButtonComponent';
+import { TitleComponent } from 'modules/TitleComponent';
+import { OwnViewLandscapeCardComponent } from 'modules/ViewComponent/ViewCardComponent';
+import { InputItemComponent } from 'modules/inputComponent/InputItemComponent';
+import { TabMenuContent } from 'modules/tabContent/TabMenuContent';
+
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-import { ButtonComponent } from '../modules/ButtonComponent';
-import { TitleComponent } from '../modules/TitleComponent';
-import { OwnViewLandscapeCardComponent } from '../modules/ViewComponent/ViewCardComponent';
-import { InputItemComponent } from '../modules/inputComponent/InputItemComponent';
-import { TabMenuContent } from '../modules/tabContent/TabMenuContent';
+import type { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
 
 export const InputPage = () => {
   const date = new Date();

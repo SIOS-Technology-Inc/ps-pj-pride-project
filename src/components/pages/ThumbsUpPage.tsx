@@ -5,13 +5,14 @@ import { BsCardList, BsList } from 'react-icons/bs';
 import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
 import { useFetchThisMonthPrideList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-import { TitleComponent } from '../modules/TitleComponent';
+import { TitleComponent } from 'modules/TitleComponent';
 import {
   ViewCardComponent,
   ViewLandscapeCardComponent,
-} from '../modules/ViewComponent/ViewCardComponent';
+} from 'modules/ViewComponent/ViewCardComponent';
+
+import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 export const ThumbsUpPage = () => {
   const date = new Date();

@@ -1,9 +1,10 @@
 import { useFetchThisMonthRankingTop3 } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-import { TitleComponent } from '../modules/TitleComponent';
-import { ViewRankingCardComponent } from '../modules/ViewComponent/ViewCardComponent';
+import { TitleComponent } from 'modules/TitleComponent';
+import { ViewRankingCardComponent } from 'modules/ViewComponent/ViewCardComponent';
+
+import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 export const TopPage = () => {
   const { user } = useFirebaseAuth();
