@@ -19,40 +19,17 @@ type ViewCardComponentProps = {
   onClick: () => void;
 };
 
-export const ViewCardComponent = (props: ViewCardComponentProps) => {
-  const { prideContent, onClick } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL, uid } =
-    prideContent;
-
-  const { uid: userId } = useFirebaseAuth();
-
-  return (
-    <>
-      <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg p-3 shadow-lg">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center gap-2 ">
-            <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
-            <span className="text-lg ">{userName}</span>
-          </div>
-          <ThumbsUpButton onClick={() => onClick()} disable={uid == userId} />
-        </div>
-        <h2 className="text-2xl">{title}</h2>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <ViewOneLineContent label="対象サービス" content={serviceName} />
-            <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
-          </div>
-          <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
-        </div>
-      </div>
-    </>
-  );
+type OwnViewLandscapeCardComponentProps = {
+  prideContent: PrideContentType;
+  onClickEdit: () => void;
+  onClickDelete: () => void;
 };
 
 type ViewRankingCardComponentProps = {
   prideContent: PrideContentType;
   rank: number;
 };
+
 export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) => {
   const { prideContent, rank } = props;
   const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
@@ -82,11 +59,6 @@ export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) =
   );
 };
 
-type OwnViewLandscapeCardComponentProps = {
-  prideContent: PrideContentType;
-  onClickEdit: () => void;
-  onClickDelete: () => void;
-};
 export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardComponentProps) => {
   const { prideContent, onClickDelete, onClickEdit } = props;
   const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
@@ -142,11 +114,56 @@ export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardCompone
   );
 };
 
+export const ViewCardComponent = (props: ViewCardComponentProps) => {
+  const { prideContent, onClick } = props;
+  const {
+    userName,
+    customerName,
+    serviceName,
+    thumbsUsers,
+    title,
+    userPhotoURL,
+    uid: contentOwnerUid,
+  } = prideContent;
+
+  const { uid } = useFirebaseAuth();
+
+  return (
+    <>
+      <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg p-3 shadow-lg">
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-row items-center gap-2 ">
+            <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
+            <span className="text-lg ">{userName}</span>
+          </div>
+          <ThumbsUpButton onClick={() => onClick()} disable={uid == contentOwnerUid} />
+        </div>
+        <h2 className="text-2xl">{title}</h2>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <ViewOneLineContent label="対象サービス" content={serviceName} />
+            <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
+          </div>
+          <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
+        </div>
+      </div>
+    </>
+  );
+};
+
 export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const { userName, thumbsUsers, title, userPhotoURL, serviceName, customerName } = prideContent;
+  const {
+    userName,
+    thumbsUsers,
+    title,
+    userPhotoURL,
+    serviceName,
+    customerName,
+    uid: contentOwnerUid,
+  } = prideContent;
 
-  const { user } = useFirebaseAuth();
+  const { uid } = useFirebaseAuth();
 
   return (
     <>
@@ -159,7 +176,7 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
             </div>
             <h2 className="grow text-2xl">{title}</h2>
           </div>
-          <ThumbsUpButton onClick={() => onClick()} disable={thumbsUsers.includes(user.photoURL)} />
+          <ThumbsUpButton onClick={() => onClick()} disable={uid == contentOwnerUid} />
         </div>
         <div className="flex w-full flex-row gap-2">
           <ViewMultiLineContent label="対象サービス" content={serviceName} />
