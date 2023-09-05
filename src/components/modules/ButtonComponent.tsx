@@ -37,7 +37,12 @@ export const ThumbsUpButton = (props: ThumbsUpButtonType) => {
   return (
     <>
       <button
-        className="flex flex-row items-center gap-1 rounded-lg bg-[#DBDBDB] p-2 text-gray transition-transform hover:-translate-x-1 hover:-translate-y-1"
+        className={
+          'flex flex-row items-center gap-1 rounded-lg p-2 transition-all ' +
+          (disable
+            ? ' bg-[#3d9ceb] p-2 text-white'
+            : ' bg-[#DBDBDB] p-2 text-gray hover:-translate-x-1 hover:-translate-y-1')
+        }
         onClick={onClickThumbsUpButton}
         disabled={firstClick || disable}
       >

@@ -126,7 +126,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
     uid: contentOwnerUid,
   } = prideContent;
 
-  const { uid } = useFirebaseAuth();
+  const { uid, user } = useFirebaseAuth();
 
   return (
     <>
@@ -136,7 +136,10 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
             <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
             <span className="text-lg ">{userName}</span>
           </div>
-          <ThumbsUpButton onClick={() => onClick()} disable={uid == contentOwnerUid} />
+          <ThumbsUpButton
+            onClick={() => onClick()}
+            disable={uid == contentOwnerUid || thumbsUsers.includes(user.photoURL)}
+          />
         </div>
         <h2 className="text-2xl">{title}</h2>
         <div className="flex flex-col gap-4">
@@ -163,7 +166,7 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
     uid: contentOwnerUid,
   } = prideContent;
 
-  const { uid } = useFirebaseAuth();
+  const { uid, user } = useFirebaseAuth();
 
   return (
     <>
@@ -176,7 +179,10 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
             </div>
             <h2 className="grow text-2xl">{title}</h2>
           </div>
-          <ThumbsUpButton onClick={() => onClick()} disable={uid == contentOwnerUid} />
+          <ThumbsUpButton
+            onClick={() => onClick()}
+            disable={uid == contentOwnerUid || thumbsUsers.includes(user.photoURL)}
+          />
         </div>
         <div className="flex w-full flex-row gap-2">
           <ViewMultiLineContent label="対象サービス" content={serviceName} />
