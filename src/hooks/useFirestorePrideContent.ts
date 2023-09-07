@@ -74,7 +74,7 @@ export const useFirestorePrideContent = () => {
 
   const readThisMonthRankingTop3 = async (): Promise<PrideContentFirestoreDataType[]> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
-    const queryRef = query(collRef, orderBy('thumbsCount', 'desc'), limit(3));
+    const queryRef = query(collRef, orderBy('thumbsCount', 'asc'), limit(3));
     const snapshot = await getDocs(queryRef);
     return snapshot.docs.map((doc) => doc.data());
   };
@@ -114,6 +114,7 @@ export const useFirestorePrideContent = () => {
     const updateDocRef = doc(db, collectionName, uid);
     await updateDoc(updateDocRef, {
       thumbsUsers: registerThumbsUser,
+      thumbsCount: registerThumbsUser.length,
     });
   };
 
