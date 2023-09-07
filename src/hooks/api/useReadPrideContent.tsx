@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 
-import { useDIPrideContent } from './useDIPrideContent';
+import { usePrideContent } from './usePrideContent';
 
 export const useFetchThisMonthPrideList = () => {
-  const { readThisMonthPrideList } = useDIPrideContent();
+  const { readThisMonthPrideList } = usePrideContent();
   const {
     data: prideContentList,
     mutate: prideContentMutate,
@@ -14,7 +14,7 @@ export const useFetchThisMonthPrideList = () => {
 };
 
 export const useFetchThisMonthRankingTop3 = () => {
-  const { readThisMonthRankingTop3 } = useDIPrideContent();
+  const { readThisMonthRankingTop3 } = usePrideContent();
 
   const { data: prideContentRankingList, isLoading: isLoadingPrideContentRanking } = useSWR(
     'prideContentRanking',
@@ -25,7 +25,7 @@ export const useFetchThisMonthRankingTop3 = () => {
 };
 
 export const useFetchThisMonthOwnPrideContentList = (uid: string) => {
-  const { readThisMonthOwnPrideContentList } = useDIPrideContent();
+  const { readThisMonthOwnPrideContentList } = usePrideContent();
 
   const {
     data: prideContentOwnList,

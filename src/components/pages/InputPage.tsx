@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import { usePrideContent } from '@/hooks/api/usePrideContent';
 import { useFetchThisMonthOwnPrideContentList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
@@ -33,7 +33,7 @@ export const InputPage = () => {
   const [editData, setEditData] = useState<PrideContentType>(initializePrideContent);
 
   const { user, uid } = useFirebaseAuth();
-  const { createPride, deletePride, updatePride } = useDIPrideContent();
+  const { createPride, deletePride, updatePride } = usePrideContent();
 
   const { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate } =
     useFetchThisMonthOwnPrideContentList(uid);

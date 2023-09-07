@@ -6,6 +6,7 @@ export type PrideContentType = {
   serviceName: string;
   customerName: string;
   thumbsUsers: string[];
+  createdAt?: Date;
 };
 
 export type InputFormPrideContentType = {

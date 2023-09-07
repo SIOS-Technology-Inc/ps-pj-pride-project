@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
-import { useDIPrideContent } from '@/hooks/api/useDIPrideContent';
+import { usePrideContent } from '@/hooks/api/usePrideContent';
 import { useFetchThisMonthPrideList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
@@ -19,7 +19,7 @@ export const ThumbsUpPage = () => {
   const month = date.getMonth() + 1;
 
   const { user } = useFirebaseAuth();
-  const { pushLikeForPride } = useDIPrideContent();
+  const { pushLikeForPride } = usePrideContent();
   const { prideContentList, isLoadingPrideContent, prideContentMutate } =
     useFetchThisMonthPrideList();
 
@@ -37,6 +37,7 @@ export const ThumbsUpPage = () => {
   }, [viewType]);
 
   if (isLoadingPrideContent || !prideContentList) return <LoadingComponent />;
+  console.log(prideContentList);
 
   return (
     <>

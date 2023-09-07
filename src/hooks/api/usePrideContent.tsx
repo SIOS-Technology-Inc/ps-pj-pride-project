@@ -1,6 +1,6 @@
 import { useFirestorePrideContent } from '../useFirestorePrideContent';
 
-export const useDIPrideContent = () => {
+export const usePrideContent = () => {
   const {
     createPride,
     updatePride,

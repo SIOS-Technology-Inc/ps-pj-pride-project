@@ -12,6 +12,7 @@ import {
   limit,
   orderBy,
   query,
+  serverTimestamp,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -25,7 +26,18 @@ export const useFirestorePrideContent = () => {
 
   const prideDataConverter: FirestoreDataConverter<PrideContentFirestoreDataType> = {
     toFirestore(content: PrideContentFirestoreDataType): DocumentData {
-      return content.pride;
+      if (content.pride.createdAt) {
+        return {
+          ...content.pride,
+          thumbsCount: content.pride.thumbsUsers.length,
+          createdAt: content.pride.createdAt.getTime(),
+        };
+      }
+      return {
+        ...content.pride,
+        thumbsCount: content.pride.thumbsUsers.length,
+        createdAt: serverTimestamp(),
+      };
     },
     fromFirestore(
       snapshot: QueryDocumentSnapshot,
@@ -42,22 +54,27 @@ export const useFirestorePrideContent = () => {
           thumbsUsers: data.thumbsUsers,
           userName: data.userName,
           userPhotoURL: data.userPhotoURL,
+          createdAt: data.createdAt ? new Date(data.createdAt.seconds * 1000) : new Date(),
         },
       };
     },
   };
+
   const createPride = async (content: PrideContentType): Promise<void> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
     await addDoc(collRef, { uid: '自動生成されるのでダミーで入れてます', pride: content });
   };
+
   const readThisMonthPrideList = async (): Promise<PrideContentFirestoreDataType[]> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
-    const snapshot = await getDocs(collRef);
+    const queryRef = query(collRef, orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(queryRef);
     return snapshot.docs.map((doc) => doc.data());
   };
+
   const readThisMonthRankingTop3 = async (): Promise<PrideContentFirestoreDataType[]> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
-    const queryRef = query(collRef, orderBy('thumbsUsers', 'desc'), limit(3));
+    const queryRef = query(collRef, orderBy('thumbsCount', 'desc'), limit(3));
     const snapshot = await getDocs(queryRef);
     return snapshot.docs.map((doc) => doc.data());
   };
@@ -71,12 +88,14 @@ export const useFirestorePrideContent = () => {
 
     return snapshot.docs.map((doc) => doc.data());
   };
+
   const updatePride = async (uid: string, content: PrideContentType): Promise<void> => {
-    const updateDocRef = doc(db, collectionName, uid);
+    const updateDocRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
     await updateDoc(updateDocRef, {
       ...content,
     });
   };
+
   const deletePride = async (uid: string): Promise<void> => {
     const updateDocRef = doc(db, collectionName, uid);
     await deleteDoc(updateDocRef);
