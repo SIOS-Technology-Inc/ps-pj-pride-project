@@ -13,10 +13,6 @@ export const HeaderComponent = () => {
         <div className="flex flex-row items-center gap-2 ">
           <img src={user.photoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
           <span className="text-lg font-bold">{user.displayName}でログイン中</span>
-          {/* <FiLogOut
-            className="h-8 w-auto rounded-full p-2 transition-colors hover:cursor-pointer hover:bg-gray hover:text-white"
-            onClick={singOutAction}
-          /> */}
         </div>
       </header>
     </>
