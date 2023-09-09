@@ -65,6 +65,18 @@ export const useFirestorePrideContent = () => {
     await addDoc(collRef, { uid: '自動生成されるのでダミーで入れてます', pride: content });
   };
 
+  const updatePride = async (uid: string, content: PrideContentType): Promise<void> => {
+    const updateDocRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
+    await updateDoc(updateDocRef, {
+      ...content,
+    });
+  };
+
+  const deletePride = async (uid: string): Promise<void> => {
+    const updateDocRef = doc(db, collectionName, uid);
+    await deleteDoc(updateDocRef);
+  };
+
   const readThisMonthPrideList = async (): Promise<PrideContentFirestoreDataType[]> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
     const queryRef = query(collRef, orderBy('createdAt', 'desc'));
@@ -87,18 +99,6 @@ export const useFirestorePrideContent = () => {
     const snapshot = await getDocs(queryRef);
 
     return snapshot.docs.map((doc) => doc.data());
-  };
-
-  const updatePride = async (uid: string, content: PrideContentType): Promise<void> => {
-    const updateDocRef = doc(db, collectionName, uid).withConverter(prideDataConverter);
-    await updateDoc(updateDocRef, {
-      ...content,
-    });
-  };
-
-  const deletePride = async (uid: string): Promise<void> => {
-    const updateDocRef = doc(db, collectionName, uid);
-    await deleteDoc(updateDocRef);
   };
 
   const pushLikeForPride = async (uid: string, photoURL: string): Promise<void> => {
