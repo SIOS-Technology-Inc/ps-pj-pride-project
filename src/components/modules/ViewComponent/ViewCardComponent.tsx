@@ -154,7 +154,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
   );
 };
 
-export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
+export const ViewLandscapeDetailCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
   const {
     userName,
@@ -171,7 +171,7 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
   return (
     <>
       <div className="flex w-full flex-col gap-5 rounded-lg p-3 shadow-lg">
-        <div className="flex flex-row">
+        <div className="flex flex-row justify-between">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">
               <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
@@ -179,10 +179,13 @@ export const ViewLandscapeCardComponent = (props: ViewCardComponentProps) => {
             </div>
             <h2 className="grow text-2xl">{title}</h2>
           </div>
-          <ThumbsUpButton
-            onClick={() => onClick()}
-            disable={uid == contentOwnerUid || thumbsUsers.includes(user.photoURL)}
-          />
+          <div className="flex flex-row items-center gap-4">
+            <span className="text-lg">{thumbsUsers.length}</span>
+            <ThumbsUpButton
+              onClick={() => onClick()}
+              disable={uid == contentOwnerUid || thumbsUsers.includes(user.photoURL)}
+            />
+          </div>
         </div>
         <div className="flex w-full flex-row gap-2">
           <ViewMultiLineContent label="対象サービス" content={serviceName} />

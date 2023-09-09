@@ -9,7 +9,7 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 import { TitleComponent } from 'modules/TitleComponent';
 import {
   ViewCardComponent,
-  ViewLandscapeCardComponent,
+  ViewLandscapeDetailCardComponent,
 } from 'modules/ViewComponent/ViewCardComponent';
 
 import { LoadingComponent } from '@/utilities/LoadingComponent';
@@ -65,7 +65,7 @@ export const ThumbsUpPage = () => {
       ) : (
         <div className="flex w-full flex-col gap-10">
           {prideContentList.map((content) => (
-            <ViewLandscapeCardComponent
+            <ViewLandscapeDetailCardComponent
               key={content.uid}
               prideContent={content.pride}
               onClick={() => onClickThumbsUpButton(content.uid)}
