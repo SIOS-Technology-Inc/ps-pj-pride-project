@@ -4813,7 +4813,7 @@ __metadata:
     prettier: "npm:^2.8.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
-    react-error-boundary: "npm:^3.1.4"
+    react-error-boundary: "npm:^4.0.11"
     react-hook-form: "npm:^7.45.4"
     react-icon: "npm:^1.0.0"
     react-icons: "npm:^4.8.0"
@@ -4839,14 +4839,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "react-error-boundary@npm:3.1.4"
+"react-error-boundary@npm:^4.0.11":
+  version: 4.0.11
+  resolution: "react-error-boundary@npm:4.0.11"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
   peerDependencies:
     react: ">=16.13.1"
-  checksum: 7dbf53e15f0fd208b23521b96743c70166ca3a16aad8bcad7632b1da80f19035dfe91813fa65ee7ff7b7c826a15071e08b8e9270dc96392262ea8b1ab0ceedfa
+  checksum: 2e08c57b755edc1fbd16ee51d398169e6109695ce41b84187321c5c41b1335c32f7cb495830ebcee4f9131579ea0324a316068a6dd83574c45db6b13230f5b7d
   languageName: node
   linkType: hard
 
