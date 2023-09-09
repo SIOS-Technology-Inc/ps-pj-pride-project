@@ -24,6 +24,9 @@ type OwnViewLandscapeCardComponentProps = {
   onClickEdit: () => void;
   onClickDelete: () => void;
 };
+type PastViewLandscapeCardComponentProps = {
+  prideContent: PrideContentType;
+};
 
 type ViewRankingCardComponentProps = {
   prideContent: PrideContentType;
@@ -109,6 +112,31 @@ export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardCompone
             <AiFillDelete />
           </button>
         </div>
+      </div>
+    </>
+  );
+};
+export const PastViewLandscapeCardComponent = (props: PastViewLandscapeCardComponentProps) => {
+  const { prideContent } = props;
+  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
+
+  return (
+    <>
+      <div className="flex w-full flex-col gap-5 rounded-lg p-3 shadow-lg">
+        <div className="flex flex-row">
+          <div className="flex grow flex-row gap-4">
+            <div className="flex flex-row items-center gap-2">
+              <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
+              <span className="text-lg">{userName}</span>
+            </div>
+            <h2 className="grow text-2xl">{title}</h2>
+          </div>
+        </div>
+        <div className="flex w-full flex-row gap-2">
+          <ViewMultiLineContent label="対象サービス" content={serviceName} />
+          <ViewMultiLineContent label="顧客名・社内検証等" content={customerName} />
+        </div>
+        <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
       </div>
     </>
   );
