@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
@@ -8,8 +8,8 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 import { TitleComponent } from 'modules/TitleComponent';
 import {
-  ViewCardComponent,
   ViewLandscapeDetailCardComponent,
+  ViewLandscapeSimpleCardComponent,
 } from 'modules/ViewComponent/ViewCardComponent';
 
 import { LoadingComponent } from '@/utilities/LoadingComponent';
@@ -29,50 +29,63 @@ export const ThumbsUpPage = () => {
     prideContentMutate();
   };
 
-  const [viewType, setViewType] = useState<'card' | 'list'>('list');
-  const viewCss: { card: string; list: string } = useMemo(() => {
-    if (viewType == 'card') return { card: '', list: 'opacity-40' };
-    if (viewType == 'list') return { card: 'opacity-40', list: '' };
-    return { card: '', list: '' };
-  }, [viewType]);
+  const viewCss = {
+    simple: { simple: '', detail: 'opacity-40' },
+    detail: { simple: 'opacity-40', detail: '' },
+  } as const satisfies Record<string, { simple: string; detail: string }>;
+
+  const [viewType, setViewType] = useState<keyof typeof viewCss>('detail');
 
   if (isLoadingPrideContent || !prideContentList) return <LoadingComponent />;
-  console.log(prideContentList);
+
+  const ViewCardComponent = () => {
+    if (viewType == 'detail') {
+      return (
+        <>
+          <div className="flex w-full flex-col gap-10">
+            {prideContentList.map((content) => (
+              <ViewLandscapeDetailCardComponent
+                key={content.uid}
+                prideContent={content.pride}
+                onClick={() => onClickThumbsUpButton(content.uid)}
+              />
+            ))}
+          </div>
+        </>
+      );
+    }
+    if (viewType == 'simple') {
+      return (
+        <>
+          <div className="flex w-full flex-col gap-2">
+            {prideContentList.map((content) => (
+              <ViewLandscapeSimpleCardComponent
+                key={content.uid}
+                prideContent={content.pride}
+                onClick={() => onClickThumbsUpButton(content.uid)}
+              />
+            ))}
+          </div>
+        </>
+      );
+    }
+    return <></>;
+  };
 
   return (
     <>
       <TitleComponent label={month + '月分褒めたたえよう'} />
       <div className="flex w-full flex-row justify-end gap-5 ">
         <BsCardList
-          className={'h-10 w-10 hover:cursor-pointer ' + viewCss.card}
-          onClick={() => setViewType('card')}
+          className={'h-10 w-10 hover:cursor-pointer ' + viewCss[viewType].detail}
+          onClick={() => setViewType('detail')}
         />
         <BsList
-          className={'h-10 w-10 hover:cursor-pointer ' + viewCss.list}
-          onClick={() => setViewType('list')}
+          className={'h-10 w-10 hover:cursor-pointer ' + viewCss[viewType].simple}
+          onClick={() => setViewType('simple')}
         />
       </div>
-      {viewType == 'card' ? (
-        <div className="flex w-full flex-row flex-wrap justify-between gap-y-10">
-          {prideContentList.map((content) => (
-            <ViewCardComponent
-              key={content.uid}
-              prideContent={content.pride}
-              onClick={() => onClickThumbsUpButton(content.uid)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="flex w-full flex-col gap-10">
-          {prideContentList.map((content) => (
-            <ViewLandscapeDetailCardComponent
-              key={content.uid}
-              prideContent={content.pride}
-              onClick={() => onClickThumbsUpButton(content.uid)}
-            />
-          ))}
-        </div>
-      )}
+      <ViewCardComponent />
     </>
   );
 };
