@@ -91,7 +91,27 @@ export const InputPage = () => {
     reset();
   };
 
-  if (isLoadingPrideContentOwnList || !prideContentOwnList) return <LoadingComponent />;
+  const OwnPrideContentList = () => {
+    if (isLoadingPrideContentOwnList || !prideContentOwnList) return <LoadingComponent />;
+    if (prideContentOwnList.length == 0)
+      return (
+        <div className="flex h-56 w-full items-center justify-center rounded-md text-2xl shadow-lg">
+          あなたの入力を待っています♡
+        </div>
+      );
+    return (
+      <>
+        {prideContentOwnList.map((content) => (
+          <OwnViewLandscapeCardComponent
+            key={content.uid}
+            prideContent={content.pride}
+            onClickDelete={() => onClickDelete(content.uid)}
+            onClickEdit={() => onClickEdit(content.uid, content.pride)}
+          />
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
@@ -124,14 +144,7 @@ export const InputPage = () => {
           </form>
         </div>
         <div className="flex w-full flex-col gap-10">
-          {prideContentOwnList.map((content) => (
-            <OwnViewLandscapeCardComponent
-              key={content.uid}
-              prideContent={content.pride}
-              onClickDelete={() => onClickDelete(content.uid)}
-              onClickEdit={() => onClickEdit(content.uid, content.pride)}
-            />
-          ))}
+          <OwnPrideContentList />
         </div>
       </div>
     </>
