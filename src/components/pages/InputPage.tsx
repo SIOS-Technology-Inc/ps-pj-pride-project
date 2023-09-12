@@ -97,7 +97,7 @@ export const InputPage = () => {
     <>
       <TitleComponent label={month + '月の自慢を書こう'} />
       <div className="flex w-full items-start gap-3">
-        <div className="flex w-full max-w-sm flex-col gap-5 rounded p-4 shadow-2xl">
+        <div className="sticky top-3 flex w-full max-w-sm flex-col gap-5 rounded p-4 shadow-2xl">
           <TabMenuContent isNewContent={isNewContent} onClickNewContent={onClickMenuNewContent} />
           <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-5">
             <InputItemComponent
