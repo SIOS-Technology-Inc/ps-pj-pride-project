@@ -37,7 +37,11 @@ export const TextAreaItemComponent = <T extends FieldValues>(props: InputItemCom
           <span>{label}</span>
           <span>{validation}</span>
         </div>
-        <textarea {...field} className="resize-none border border-gray py-1 px-2 text-lg" />
+        <textarea
+          {...field}
+          className="resize-none border border-gray py-1 px-2 text-lg"
+          maxLength={40}
+        />
         <span className="h-4 w-full text-xs text-red-600">{error ? error.message : ''}</span>
       </div>
     </>

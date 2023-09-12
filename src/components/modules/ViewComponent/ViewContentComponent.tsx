@@ -2,6 +2,17 @@ type ViewContentProps = {
   label: string;
   content: string;
 };
+
+export const ViewOnlyContent = (props: { content: string }) => {
+  const { content } = props;
+  return (
+    <>
+      <ul className="flex grow flex-row justify-between text-lg">
+        <li className="text-black">{content}</li>
+      </ul>
+    </>
+  );
+};
 export const ViewOneLineContent = (props: ViewContentProps) => {
   const { content, label } = props;
   return (

@@ -6,11 +6,7 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 
 import { ThumbsUpButton } from 'modules/ButtonComponent';
 
-import {
-  ViewMultiLineContent,
-  ViewMultiLineImgListContent,
-  ViewOneLineContent,
-} from './ViewContentComponent';
+import { ViewMultiLineImgListContent, ViewOnlyContent } from './ViewContentComponent';
 
 import type { PrideContentType } from '@/types/contentsType';
 
@@ -35,7 +31,7 @@ type ViewRankingCardComponentProps = {
 
 export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) => {
   const { prideContent, rank } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
 
   return (
     <>
@@ -50,10 +46,13 @@ export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) =
           </div>
           <h2 className="text-2xl">{title}</h2>
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <ViewOneLineContent label="対象サービス" content={serviceName} />
-              <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
-            </div>
+            {memo != '' ? (
+              <div className="flex flex-col gap-2">
+                <ViewOnlyContent content={memo} />
+              </div>
+            ) : (
+              <></>
+            )}
             <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
           </div>
         </div>
@@ -64,7 +63,7 @@ export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) =
 
 export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardComponentProps) => {
   const { prideContent, onClickDelete, onClickEdit } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
   const firstClick = useRef<boolean>(false);
 
   const onClickCommonFunction = async (onClick: () => void) => {
@@ -86,10 +85,13 @@ export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardCompone
             <h2 className="grow text-2xl">{title}</h2>
           </div>
         </div>
-        <div className="flex w-full flex-row gap-2">
-          <ViewMultiLineContent label="対象サービス" content={serviceName} />
-          <ViewMultiLineContent label="顧客名・社内検証等" content={customerName} />
-        </div>
+        {memo != '' ? (
+          <div className="flex w-full flex-row gap-2">
+            <ViewOnlyContent content={memo} />
+          </div>
+        ) : (
+          <></>
+        )}
         <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
 
         <div className="flex justify-end gap-5">
@@ -118,7 +120,7 @@ export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardCompone
 };
 export const PastViewLandscapeCardComponent = (props: PastViewLandscapeCardComponentProps) => {
   const { prideContent } = props;
-  const { userName, customerName, serviceName, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
 
   return (
     <>
@@ -132,10 +134,13 @@ export const PastViewLandscapeCardComponent = (props: PastViewLandscapeCardCompo
             <h2 className="grow text-2xl">{title}</h2>
           </div>
         </div>
-        <div className="flex w-full flex-row gap-2">
-          <ViewMultiLineContent label="対象サービス" content={serviceName} />
-          <ViewMultiLineContent label="顧客名・社内検証等" content={customerName} />
-        </div>
+        {memo != '' ? (
+          <div className="flex w-full flex-row gap-2">
+            <ViewOnlyContent content={memo} />
+          </div>
+        ) : (
+          <></>
+        )}
         <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
       </div>
     </>
@@ -144,15 +149,7 @@ export const PastViewLandscapeCardComponent = (props: PastViewLandscapeCardCompo
 
 export const ViewCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const {
-    userName,
-    customerName,
-    serviceName,
-    thumbsUsers,
-    title,
-    userPhotoURL,
-    uid: contentOwnerUid,
-  } = prideContent;
+  const { userName, memo, thumbsUsers, title, userPhotoURL, uid: contentOwnerUid } = prideContent;
 
   const { uid, user } = useFirebaseAuth();
 
@@ -171,10 +168,13 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
         </div>
         <h2 className="text-2xl">{title}</h2>
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <ViewOneLineContent label="対象サービス" content={serviceName} />
-            <ViewOneLineContent label="顧客名・社内検証等" content={customerName} />
-          </div>
+          {memo != '' ? (
+            <div className="flex flex-col gap-2">
+              <ViewOnlyContent content={memo} />
+            </div>
+          ) : (
+            <></>
+          )}
           <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
         </div>
       </div>
@@ -184,15 +184,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
 
 export const ViewLandscapeDetailCardComponent = (props: ViewCardComponentProps) => {
   const { prideContent, onClick } = props;
-  const {
-    userName,
-    thumbsUsers,
-    title,
-    userPhotoURL,
-    serviceName,
-    customerName,
-    uid: contentOwnerUid,
-  } = prideContent;
+  const { userName, thumbsUsers, title, userPhotoURL, memo, uid: contentOwnerUid } = prideContent;
 
   const { uid, user } = useFirebaseAuth();
 
@@ -215,10 +207,13 @@ export const ViewLandscapeDetailCardComponent = (props: ViewCardComponentProps) 
             />
           </div>
         </div>
-        <div className="flex w-full flex-row gap-2">
-          <ViewMultiLineContent label="対象サービス" content={serviceName} />
-          <ViewMultiLineContent label="顧客名・社内検証等" content={customerName} />
-        </div>
+        {memo != '' ? (
+          <div className="flex w-full flex-row gap-2">
+            <ViewOnlyContent content={memo} />
+          </div>
+        ) : (
+          <></>
+        )}
         <ViewMultiLineImgListContent label="いいね！" contents={thumbsUsers} />
       </div>
     </>

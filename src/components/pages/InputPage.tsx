@@ -8,7 +8,10 @@ import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
 import { ButtonComponent } from 'modules/ButtonComponent';
 import { TitleComponent } from 'modules/TitleComponent';
 import { OwnViewLandscapeCardComponent } from 'modules/ViewComponent/ViewCardComponent';
-import { InputItemComponent } from 'modules/inputComponent/InputItemComponent';
+import {
+  InputItemComponent,
+  TextAreaItemComponent,
+} from 'modules/inputComponent/InputItemComponent';
 import { TabMenuContent } from 'modules/tabContent/TabMenuContent';
 
 import { LoadingComponent } from '@/utilities/LoadingComponent';
@@ -22,8 +25,7 @@ export const InputPage = () => {
   const [isNewContent, setIsNewContent] = useState<boolean>(true);
   const [editContentUid, setEditContentUid] = useState<string>('');
   const initializePrideContent: PrideContentType = {
-    customerName: '',
-    serviceName: '',
+    memo: '',
     thumbsUsers: [],
     title: '',
     uid: '',
@@ -40,8 +42,7 @@ export const InputPage = () => {
 
   const { handleSubmit, control, reset, setValue } = useForm<InputFormPrideContentType>({
     defaultValues: {
-      customerName: '',
-      serviceName: '',
+      memo: '',
       title: '',
     },
   });
@@ -56,8 +57,7 @@ export const InputPage = () => {
 
     setEditContentUid(uid);
     setEditData(prideContent);
-    setValue('customerName', prideContent.customerName);
-    setValue('serviceName', prideContent.serviceName);
+    setValue('memo', prideContent.memo);
     setValue('title', prideContent.title);
   };
 
@@ -110,25 +110,14 @@ export const InputPage = () => {
               label="アピールポイント"
               validation="20文字以内"
             />
-            <InputItemComponent
-              name={'serviceName'}
+            <TextAreaItemComponent
+              name={'memo'}
               control={control}
               rules={{
-                required: { value: true, message: 'これは難しい' },
-                maxLength: { value: 10, message: '文字数は10文字以内です。' },
+                maxLength: { value: 40, message: '文字数は40文字以内です。' },
               }}
-              label="対象サービス"
-              validation="10文字以内"
-            />
-            <InputItemComponent
-              name={'customerName'}
-              control={control}
-              label="顧客名・社内検証等"
-              rules={{
-                required: { value: true, message: 'これは埋めときましょう' },
-                maxLength: { value: 10, message: '文字数は10文字以内です。' },
-              }}
-              validation="10文字以内"
+              label="アピール内容"
+              validation="40文字以内"
             />
 
             <ButtonComponent label="投稿" />

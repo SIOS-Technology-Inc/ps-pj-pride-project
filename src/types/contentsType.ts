@@ -3,16 +3,14 @@ export type PrideContentType = {
   userName: string;
   userPhotoURL: string;
   title: string;
-  serviceName: string;
-  customerName: string;
+  memo: string;
   thumbsUsers: string[];
   createdAt?: Date;
 };
 
 export type InputFormPrideContentType = {
   title: string;
-  serviceName: string;
-  customerName: string;
+  memo: string;
 };
 
 export type PrideContentFirestoreDataType = {
