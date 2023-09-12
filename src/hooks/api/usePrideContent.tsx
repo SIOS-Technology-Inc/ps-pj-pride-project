@@ -9,7 +9,6 @@ export const usePrideContent = () => {
     readThisMonthOwnPrideContentList,
     readThisMonthPrideList,
     readThisMonthRankingTop3,
-    readMonthPrideList,
     readTargetMonthPrideList,
   } = useFirestorePrideContent();
 
@@ -21,7 +20,6 @@ export const usePrideContent = () => {
     readThisMonthOwnPrideContentList,
     readThisMonthPrideList,
     readThisMonthRankingTop3,
-    readMonthPrideList,
     readTargetMonthPrideList,
   };
 };

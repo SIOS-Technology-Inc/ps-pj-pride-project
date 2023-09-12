@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import {
-  useFetchMonthPrideList,
-  useFetchTargetMonthPrideList,
-} from '@/hooks/api/useReadPrideContent';
+import { useFetchTargetMonthPrideList } from '@/hooks/api/useReadPrideContent';
 
 import { TitleComponent } from 'modules/TitleComponent';
 
@@ -12,23 +9,40 @@ import { LoadingComponent } from '@/utilities/LoadingComponent';
 import { PastViewLandscapeCardComponent } from '../modules/ViewComponent/ViewCardComponent';
 
 export const PastListPage = () => {
-  const [targetId, setTargetId] = useState<string>('');
-  const { prideMonthList, isLoadingPrideMonthList } = useFetchMonthPrideList();
+  const nowDate = new Date();
+
+  const [targetId, setTargetId] = useState<string>(
+    nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-pride'
+  );
 
   const { prideContentTargetList, isLoadingPrideContentTargetList } =
     useFetchTargetMonthPrideList(targetId);
 
-  useEffect(() => {
-    if (!prideMonthList || prideMonthList.length == 0) return;
-    setTargetId(prideMonthList[0]);
-  }, [prideMonthList]);
+  const prideMonthList = [0, 1, 2].map(
+    (value) => nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1 - value) + '-pride'
+  );
 
   const onClickPrideMonth = (monthString: string) => {
     setTargetId(monthString);
     window.scrollTo(0, 0);
   };
 
-  if (isLoadingPrideMonthList || !prideMonthList) return <LoadingComponent />;
+  const PastPrideContentList = () => {
+    if (isLoadingPrideContentTargetList || !prideContentTargetList) return <LoadingComponent />;
+    if (prideContentTargetList.length == 0)
+      return (
+        <div className="flex h-56 w-full items-center justify-center rounded-md text-2xl shadow-lg">
+          情報がなっしぶる
+        </div>
+      );
+    return (
+      <>
+        {prideContentTargetList.map((content) => (
+          <PastViewLandscapeCardComponent key={content.uid} prideContent={content.pride} />
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
@@ -46,13 +60,7 @@ export const PastListPage = () => {
           ))}
         </div>
         <div className="flex w-full flex-col gap-2">
-          {isLoadingPrideContentTargetList || !prideContentTargetList ? (
-            <LoadingComponent />
-          ) : (
-            prideContentTargetList.map((content) => (
-              <PastViewLandscapeCardComponent key={content.uid} prideContent={content.pride} />
-            ))
-          )}
+          <PastPrideContentList />
         </div>
       </div>
     </>

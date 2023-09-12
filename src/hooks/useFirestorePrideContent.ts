@@ -59,15 +59,6 @@ export const useFirestorePrideContent = () => {
     },
   };
 
-  const prideListConverter: FirestoreDataConverter<string> = {
-    toFirestore(content: string): DocumentData {
-      return { content };
-    },
-    fromFirestore(snapshot: QueryDocumentSnapshot) {
-      return snapshot.id;
-    },
-  };
-
   const createPride = async (content: PrideContentType): Promise<void> => {
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
     await addDoc(collRef, { uid: '自動生成されるのでダミーで入れてます', pride: content });
@@ -137,13 +128,6 @@ export const useFirestorePrideContent = () => {
     return snapshot.docs.map((doc) => doc.data());
   };
 
-  const readMonthPrideList = async (): Promise<string[]> => {
-    const collRef = collection(db, 'env').withConverter(prideListConverter);
-    const queryRef = query(collRef, orderBy('timestamp', 'desc'), limit(3));
-    const snapshot = await getDocs(queryRef);
-    return snapshot.docs.map((doc) => doc.data());
-  };
-
   return {
     createPride,
     updatePride,
@@ -152,7 +136,6 @@ export const useFirestorePrideContent = () => {
     pushLikeForPride,
     readThisMonthRankingTop3,
     readThisMonthOwnPrideContentList,
-    readMonthPrideList,
     readTargetMonthPrideList,
   };
 };

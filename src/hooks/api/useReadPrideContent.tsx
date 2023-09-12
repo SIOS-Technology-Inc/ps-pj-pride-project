@@ -36,14 +36,6 @@ export const useFetchThisMonthOwnPrideContentList = (uid: string) => {
   return { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate };
 };
 
-export const useFetchMonthPrideList = () => {
-  const { readMonthPrideList } = usePrideContent();
-  const { data: prideMonthList, isLoading: isLoadingPrideMonthList } = useSWRImmutable('env', () =>
-    readMonthPrideList()
-  );
-  return { prideMonthList, isLoadingPrideMonthList };
-};
-
 export const useFetchTargetMonthPrideList = (target: string) => {
   const { readTargetMonthPrideList } = usePrideContent();
   const { data: prideContentTargetList, isLoading: isLoadingPrideContentTargetList } =
