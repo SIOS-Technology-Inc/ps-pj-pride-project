@@ -17,10 +17,14 @@ export const InputItemComponent = <T extends FieldValues>(props: InputItemCompon
       <div className="flex w-full flex-col">
         <div className="flex flex-row justify-between text-lg text-gray">
           <span>{label}</span>
-          <span>{validation}</span>
+          <span>
+            {field.value.length}/{validation}
+          </span>
         </div>
         <input type="text" {...field} className="border border-gray py-1 px-2 text-lg" />
-        <span className="h-4 w-full text-xs text-red-600">{error ? error.message : ''}</span>
+        <span className="h-4 w-full text-right text-xs text-red-600">
+          {error ? error.message : ''}
+        </span>
       </div>
     </>
   );
@@ -35,11 +39,13 @@ export const TextAreaItemComponent = <T extends FieldValues>(props: InputItemCom
       <div className="flex w-full flex-col">
         <div className="flex flex-row justify-between text-lg text-gray">
           <span>{label}</span>
-          <span>{validation}</span>
+          <span>
+            {field.value.length}/{validation}
+          </span>
         </div>
         <textarea
           {...field}
-          className="resize-none border border-gray py-1 px-2 text-lg"
+          className="h-24 resize-none border border-gray py-1 px-2 text-lg"
           maxLength={40}
         />
         <span className="h-4 w-full text-xs text-red-600">{error ? error.message : ''}</span>
