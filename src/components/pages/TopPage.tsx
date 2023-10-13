@@ -1,5 +1,5 @@
-import { useFetchThisMonthRankingTop3 } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFetchThisMonthRankingTop3 } from '@/hooks/useReadPrideContent';
 
 import { TitleComponent } from 'modules/TitleComponent';
 import { ViewRankingCardComponent } from 'modules/ViewComponent/ViewCardComponent';

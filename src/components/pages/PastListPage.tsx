@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useFetchTargetMonthPrideList } from '@/hooks/api/useReadPrideContent';
+import { useFetchTargetMonthPrideList } from '@/hooks/useReadPrideContent';
 
 import { TitleComponent } from 'modules/TitleComponent';
 

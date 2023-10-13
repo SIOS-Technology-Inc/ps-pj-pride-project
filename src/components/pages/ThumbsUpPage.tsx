@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
-import { usePrideContent } from '@/hooks/api/usePrideContent';
-import { useFetchThisMonthPrideList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { usePrideContent } from '@/hooks/usePrideContent';
+import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
 
 import { TitleComponent } from 'modules/TitleComponent';
 import {

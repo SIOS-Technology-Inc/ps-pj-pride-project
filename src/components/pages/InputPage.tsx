@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { usePrideContent } from '@/hooks/api/usePrideContent';
-import { useFetchThisMonthOwnPrideContentList } from '@/hooks/api/useReadPrideContent';
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { usePrideContent } from '@/hooks/usePrideContent';
+import { useFetchThisMonthOwnPrideContentList } from '@/hooks/useReadPrideContent';
 
 import { ButtonComponent } from 'modules/ButtonComponent';
 import { TitleComponent } from 'modules/TitleComponent';

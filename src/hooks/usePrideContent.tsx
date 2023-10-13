@@ -1,4 +1,4 @@
-import { useFirestorePrideContent } from '../useFirestorePrideContent';
+import { useFirestorePrideContent } from './api/useFirestorePrideContent';
 
 export const usePrideContent = () => {
   const {
