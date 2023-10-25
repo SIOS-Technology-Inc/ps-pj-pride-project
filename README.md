@@ -121,4 +121,4 @@
 
 - [Firebase コンソール](https://console.firebase.google.com/project/sample-react-blog/firestore?hl=ja)
 
-dummyAccessKeyId:`AKIAQA2IFJE3MPUNZT6M`
+azure_storage_account_key:`AKIAQA2IFJE3MPUNZT6M`
