@@ -37,7 +37,7 @@ export const ViewRankingCardComponent = (props: ViewRankingCardComponentProps) =
     <>
       <div className="flex w-full max-w-sm flex-col">
         <span className="flex w-full items-center justify-center text-2xl">TOP.{rank + 1}</span>
-        <div className="flex w-full  flex-col gap-5 rounded-lg p-3 shadow-lg">
+        <div className="flex w-full  flex-col gap-5 rounded-lg border border-gray/70 p-3 ">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center gap-2 ">
               <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
@@ -75,7 +75,7 @@ export const OwnViewLandscapeCardComponent = (props: OwnViewLandscapeCardCompone
 
   return (
     <>
-      <div className="flex w-full flex-col gap-5 rounded-lg p-3 shadow-lg">
+      <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
         <div className="flex flex-row">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">
@@ -124,7 +124,7 @@ export const PastViewLandscapeCardComponent = (props: PastViewLandscapeCardCompo
 
   return (
     <>
-      <div className="flex w-full flex-col gap-5 rounded-lg p-3 shadow-lg">
+      <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
         <div className="flex flex-row">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">
@@ -155,7 +155,7 @@ export const ViewCardComponent = (props: ViewCardComponentProps) => {
 
   return (
     <>
-      <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg p-3 shadow-lg">
+      <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg border border-gray/70 p-3">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center gap-2 ">
             <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
@@ -190,7 +190,7 @@ export const ViewLandscapeDetailCardComponent = (props: ViewCardComponentProps) 
 
   return (
     <>
-      <div className="flex w-full flex-col gap-5 rounded-lg p-3 shadow-lg">
+      <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
         <div className="flex flex-row justify-between">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">

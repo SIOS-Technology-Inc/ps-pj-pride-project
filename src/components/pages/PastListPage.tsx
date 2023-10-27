@@ -31,7 +31,7 @@ export const PastListPage = () => {
     if (isLoadingPrideContentTargetList || !prideContentTargetList) return <LoadingComponent />;
     if (prideContentTargetList.length == 0)
       return (
-        <div className="flex h-56 w-full items-center justify-center rounded-md text-2xl shadow-lg">
+        <div className="flex h-56 w-full items-center justify-center rounded-md border border-gray/70 text-2xl">
           情報がなっしぶる
         </div>
       );
@@ -48,7 +48,7 @@ export const PastListPage = () => {
     <>
       <TitleComponent label="過去の情報" />
       <div className="relative flex w-full flex-row items-start gap-4">
-        <div className="sticky top-0 flex w-72 flex-col rounded-lg p-6 shadow-lg">
+        <div className="sticky top-0 flex w-72 flex-col rounded-lg border border-gray/70 p-6">
           {prideMonthList.map((value) => (
             <span
               key={value}
