@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFirebaseAuth } from '@/hooks/useAuth';
 
 import { ThumbsUpButton } from 'modules/ButtonComponent';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { BsCardList, BsList } from 'react-icons/bs';
 
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFirebaseAuth } from '@/hooks/useAuth';
 import { usePrideContent } from '@/hooks/usePrideContent';
 import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
 

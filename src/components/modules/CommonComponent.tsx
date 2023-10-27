@@ -2,7 +2,7 @@ import FooterLogoFox1 from 'src/assets/fox1.png';
 import FooterLogoFox2 from 'src/assets/fox2.png';
 import Logo from 'src/assets/logo.svg';
 
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFirebaseAuth } from '@/hooks/useAuth';
 
 export const HeaderComponent = () => {
   const { user } = useFirebaseAuth();

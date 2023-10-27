@@ -1,4 +1,4 @@
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFirebaseAuth } from '@/hooks/useAuth';
 import { useFetchThisMonthRankingTop3 } from '@/hooks/useReadPrideContent';
 
 import { TitleComponent } from 'modules/TitleComponent';

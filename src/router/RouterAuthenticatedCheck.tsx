@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
 
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
+import { useFirebaseAuth } from '@/hooks/useAuth';
 
-import { auth } from '../auth/authFirebase';
-import { LoadingComponent } from '../utilities/LoadingComponent';
+import { auth } from '@/auth/authFirebase';
+import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 type Props = {
   children: React.ReactNode;
