@@ -1230,6 +1230,64 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/animated@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/animated@npm:9.7.3"
+  dependencies:
+    "@react-spring/shared": "npm:~9.7.3"
+    "@react-spring/types": "npm:~9.7.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 158848e387549e7418256f81ac69f4c85c6460964a592d100c4a49136027f36eb85efbbf304f6050cce1f5893e6c125c709c02f025f812c2f484120a7a78e41f
+  languageName: node
+  linkType: hard
+
+"@react-spring/core@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/core@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": "npm:~9.7.3"
+    "@react-spring/shared": "npm:~9.7.3"
+    "@react-spring/types": "npm:~9.7.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 14ca1ecc94e1f388bf93611b595801dc456c0e415eb2acd4725595e4403e54ecda5808a40c118ee340d49aa4eb473b37d94d9ea68b7d52fc5558f705f976ccfa
+  languageName: node
+  linkType: hard
+
+"@react-spring/shared@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/shared@npm:9.7.3"
+  dependencies:
+    "@react-spring/types": "npm:~9.7.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 9d4c6f9185d40a0cf2131621021b9717fe29922dc79854f5d352e271c91a1bf0e84f92bf654c7179c870a625b79bf87c30809617aed84d8436c527965c813b17
+  languageName: node
+  linkType: hard
+
+"@react-spring/types@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/types@npm:9.7.3"
+  checksum: 302ea07a4c0af008b24834ff102b95c6abc433bcb0ea4b3b9e7511f7f0552cf842d10ae34c0f4b88a0055d0da3d245e2047730ee2742fd478ba798ae4b552c4f
+  languageName: node
+  linkType: hard
+
+"@react-spring/web@npm:^9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/web@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": "npm:~9.7.3"
+    "@react-spring/core": "npm:~9.7.3"
+    "@react-spring/shared": "npm:~9.7.3"
+    "@react-spring/types": "npm:~9.7.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 23a947137fb29a1468b9c7edc6bca29099fbd47a3d043d69da26735db476fce71ffe4021b52bb6a904c72b0b1e50f4760d9977545792e59f4d8d5aaf30a4e6cb
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.3.2":
   version: 1.3.2
   resolution: "@remix-run/router@npm:1.3.2"
@@ -4789,6 +4847,7 @@ __metadata:
   resolution: "react-component-sample@workspace:."
   dependencies:
     "@babel/core": "npm:^7.20.12"
+    "@react-spring/web": "npm:^9.7.3"
     "@types/node": "npm:^18.11.19"
     "@types/react": "npm:^18.0.27"
     "@types/react-dom": "npm:^18.0.10"

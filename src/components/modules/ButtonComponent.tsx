@@ -4,15 +4,22 @@ import { FiThumbsUp } from 'react-icons/fi';
 
 type ButtonComponentProps = {
   label: string;
+  color: keyof typeof DesignCode;
   onClick?: () => void;
 };
-export const ButtonComponent = (props: ButtonComponentProps) => {
-  const { label, onClick } = props;
+const DesignCode = {
+  default: ' border-gray text-gray',
+  blue: ' border-event text-event',
+} as const satisfies Record<string, string>;
+
+export const ButtonComponent = ({ label, color = 'default', onClick }: ButtonComponentProps) => {
   return (
     <>
       <button
         type={onClick ? 'button' : 'submit'}
-        className="flex items-center justify-center border-2 border-gray py-3 px-8 text-lg"
+        className={
+          'flex items-center justify-center border-2 py-3 px-8 text-lg ' + DesignCode[color]
+        }
         onClick={onClick}
       >
         {label}

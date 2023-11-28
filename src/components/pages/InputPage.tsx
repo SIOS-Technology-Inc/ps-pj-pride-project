@@ -140,7 +140,7 @@ export const InputPage = () => {
               validation="40文字以内"
             />
 
-            <ButtonComponent label="投稿" />
+            <ButtonComponent color="default" label="投稿" />
           </form>
         </div>
         <div className="flex w-full flex-col gap-10">

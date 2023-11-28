@@ -6,9 +6,11 @@ module.exports = {
       fontFamily: {
         kurenaido: ['Zen Kurenaido'],
         zen: ['Zen Maru Gothic'],
+        yuji: ['Yuji Syuku'],
       },
       colors: {
         gray: '#666666',
+        event: '#81B9D0',
       },
     },
   },
