@@ -134,10 +134,10 @@ export const InputPage = () => {
               name={'memo'}
               control={control}
               rules={{
-                maxLength: { value: 40, message: '文字数は40文字以内です。' },
+                maxLength: { value: 280, message: '文字数は280文字以内です。' },
               }}
               label="アピール内容"
-              validation="40文字以内"
+              validation="280文字以内"
             />
 
             <ButtonComponent color="default" label="投稿" />
