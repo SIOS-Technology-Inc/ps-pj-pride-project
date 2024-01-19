@@ -18,9 +18,12 @@ export const PastListPage = () => {
   const { prideContentTargetList, isLoadingPrideContentTargetList } =
     useFetchTargetMonthPrideList(targetId);
 
-  const prideMonthList = [0, 1, 2].map(
-    (value) => nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1 - value) + '-pride'
-  );
+  const prideMonthList = [0, 1, 2].map((value) => {
+    if (nowDate.getMonth() + 1 - value <= 0)
+      return nowDate.getFullYear() - 1 + '-' + (13 - value) + '-pride';
+
+    return nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1 - value) + '-pride';
+  });
 
   const onClickPrideMonth = (monthString: string) => {
     setTargetId(monthString);
