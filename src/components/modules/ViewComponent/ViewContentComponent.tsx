@@ -8,7 +8,7 @@ export const ViewOnlyContent = (props: { content: string }) => {
   return (
     <>
       <ul className="flex grow flex-row justify-between text-lg">
-        <li className="text-black">{content}</li>
+        <li className="break-all text-black">{content}</li>
       </ul>
     </>
   );
@@ -19,7 +19,7 @@ export const ViewOneLineContent = (props: ViewContentProps) => {
     <>
       <ul className="flex grow flex-row justify-between text-lg">
         <li className="text-gray">{label}</li>
-        <li className="text-black">{content}</li>
+        <li className="break-all text-black">{content}</li>
       </ul>
     </>
   );
@@ -30,7 +30,7 @@ export const ViewMultiLineContent = (props: ViewContentProps) => {
     <>
       <ul className="flex grow flex-col gap-1 text-lg">
         <li className="text-gray">{label}</li>
-        <li className="text-black">{content}</li>
+        <li className="break-all text-black">{content}</li>
       </ul>
     </>
   );
