@@ -14,12 +14,12 @@ export const useFetchThisMonthPrideList = () => {
   return { prideContentList, prideContentMutate, isLoadingPrideContent };
 };
 
-export const useFetchThisMonthRankingTop3 = () => {
-  const { readThisMonthRankingTop3 } = usePrideContent();
+export const useFetchLastMonthRankingTop3 = () => {
+  const { readLastMonthRankingTop3 } = usePrideContent();
 
   const { data: prideContentRankingList, isLoading: isLoadingPrideContentRanking } = useSWR(
     'prideContentRanking',
-    () => readThisMonthRankingTop3()
+    () => readLastMonthRankingTop3()
   );
 
   return { prideContentRankingList, isLoadingPrideContentRanking };

@@ -83,7 +83,12 @@ export const useFirestorePrideContent = () => {
     return snapshot.docs.map((doc) => doc.data());
   };
 
-  const readThisMonthRankingTop3 = async (): Promise<PrideContentFirestoreDataType[]> => {
+  const readLastMonthRankingTop3 = async (): Promise<PrideContentFirestoreDataType[]> => {
+    const targetCollection = () => {
+      if (today.getMonth() == 0) return today.getFullYear() - 1 + '-12-pride';
+      return today.getFullYear() + '-' + today.getMonth() + '-pride';
+    };
+    const collectionName = targetCollection();
     const collRef = collection(db, collectionName).withConverter(prideDataConverter);
     const queryRef = query(collRef, orderBy('thumbsCount', 'desc'), limit(3));
     const snapshot = await getDocs(queryRef);
@@ -134,7 +139,7 @@ export const useFirestorePrideContent = () => {
     deletePride,
     readThisMonthPrideList,
     pushLikeForPride,
-    readThisMonthRankingTop3,
+    readLastMonthRankingTop3,
     readThisMonthOwnPrideContentList,
     readTargetMonthPrideList,
   };
