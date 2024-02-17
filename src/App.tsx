@@ -1,12 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
 
+import { TopAnimation } from './components/modules/TopAnimation';
 import { RouterConfig } from './router/RouterConfig';
 
 function App() {
   return (
-    <BrowserRouter>
-      <RouterConfig />
-    </BrowserRouter>
+    <>
+      <TopAnimation />
+      <BrowserRouter>
+        <RouterConfig />
+      </BrowserRouter>
+    </>
   );
 }
 
