@@ -6,25 +6,22 @@ import { useFirebaseAuth } from '@/hooks/useAuth';
 import { usePrideContent } from '@/hooks/usePrideContent';
 import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
 
-import { TitleComponent } from 'modules/TitleComponent';
-import {
-  ViewLandscapeDetailCardComponent,
-  ViewLandscapeSimpleCardComponent,
-} from 'modules/ViewComponent/ViewCardComponent';
-
 import { LoadingComponent } from '@/utilities/LoadingComponent';
+
+import { Title } from '../common/Title/Title';
+import { UserLandscapeDetailCard } from '../modules/UserLandscapeDetailCard/UserLandscapeDetailCard';
+import { UserLandscapeSimpleCard } from '../modules/UserLandscapeSimpleCard/UserLandscapeSimpleCard';
 
 export const ThumbsUpPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { user } = useFirebaseAuth();
+  const { user, uid } = useFirebaseAuth();
   const { pushLikeForPride } = usePrideContent();
   const { prideContentList, isLoadingPrideContent, prideContentMutate } =
     useFetchThisMonthPrideList();
 
   const onClickThumbsUpButton = async (uid: string) => {
-    console.log(uid);
     await pushLikeForPride(uid, user.photoURL);
     prideContentMutate();
   };
@@ -44,10 +41,13 @@ export const ThumbsUpPage = () => {
         <>
           <div className="flex w-full flex-col gap-10">
             {prideContentList.map((content) => (
-              <ViewLandscapeDetailCardComponent
+              <UserLandscapeDetailCard
                 key={content.uid}
                 prideContent={content.pride}
                 onClick={() => onClickThumbsUpButton(content.uid)}
+                ownerFlag={
+                  content.pride.thumbsUsers.includes(user.photoURL) || uid == content.pride.uid
+                }
               />
             ))}
           </div>
@@ -59,10 +59,13 @@ export const ThumbsUpPage = () => {
         <>
           <div className="flex w-full flex-col gap-2">
             {prideContentList.map((content) => (
-              <ViewLandscapeSimpleCardComponent
+              <UserLandscapeSimpleCard
                 key={content.uid}
                 prideContent={content.pride}
                 onClick={() => onClickThumbsUpButton(content.uid)}
+                ownerFlag={
+                  content.pride.thumbsUsers.includes(user.photoURL) || uid == content.pride.uid
+                }
               />
             ))}
           </div>
@@ -74,7 +77,7 @@ export const ThumbsUpPage = () => {
 
   return (
     <>
-      <TitleComponent label={month + '月分褒めたたえよう'} />
+      <Title label={month + '月分褒めたたえよう'} />
       <div className="flex w-full flex-row justify-end gap-5 ">
         <BsCardList
           className={'h-10 w-10 hover:cursor-pointer ' + viewCss[viewType].detail}

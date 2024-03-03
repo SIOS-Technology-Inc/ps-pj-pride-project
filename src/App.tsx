@@ -1,12 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { TopAnimation } from './components/modules/TopAnimation';
+import { OpeningAnimation } from './components/common/OpeningAnimation/OpeningAnimation';
 import { RouterConfig } from './router/RouterConfig';
 
 function App() {
   return (
     <>
-      <TopAnimation />
+      <OpeningAnimation />
       <BrowserRouter>
         <RouterConfig />
       </BrowserRouter>

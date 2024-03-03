@@ -1,152 +1,91 @@
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useFirebaseAuth } from '@/hooks/useAuth';
 import { usePrideContent } from '@/hooks/usePrideContent';
 import { useFetchThisMonthOwnPrideContentList } from '@/hooks/useReadPrideContent';
 
-import { ButtonComponent } from 'modules/ButtonComponent';
-import { TitleComponent } from 'modules/TitleComponent';
-import { OwnViewLandscapeCardComponent } from 'modules/ViewComponent/ViewCardComponent';
-import {
-  InputItemComponent,
-  TextAreaItemComponent,
-} from 'modules/inputComponent/InputItemComponent';
-import { TabMenuContent } from 'modules/tabContent/TabMenuContent';
-
+import { FormLandscapePride } from '@/components/modules/FormLandscapePride/FormLandscapePride';
+import { FormPride } from '@/components/modules/FormPride/FormPride';
+import { UserCard } from '@/components/modules/UserCard/UserCard';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-import type { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+import { Title } from '../common/Title/Title';
+
+import type { PrideContentFirestoreDataType, PrideContentType } from '@/types/contentsType';
 
 export const InputPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const [isNewContent, setIsNewContent] = useState<boolean>(true);
-  const [editContentUid, setEditContentUid] = useState<string>('');
-  const initializePrideContent: PrideContentType = {
-    memo: '',
-    thumbsUsers: [],
-    title: '',
-    uid: '',
-    userName: '',
-    userPhotoURL: '',
-  };
-  const [editData, setEditData] = useState<PrideContentType>(initializePrideContent);
-
-  const { user, uid } = useFirebaseAuth();
+  const { uid } = useFirebaseAuth();
   const { createPride, deletePride, updatePride } = usePrideContent();
+
+  const [editPride, setEditPride] = useState<PrideContentFirestoreDataType>({
+    uid: '',
+    pride: {
+      memo: '',
+      thumbsUsers: [],
+      title: '',
+      uid: uid,
+      userName: '',
+      userPhotoURL: '',
+    },
+  });
+  const modalState = useState<boolean>(false);
+  const [, setIsModal] = modalState;
 
   const { prideContentOwnList, isLoadingPrideContentOwnList, prideContentOwnListMutate } =
     useFetchThisMonthOwnPrideContentList(uid);
 
-  const { handleSubmit, control, reset, setValue } = useForm<InputFormPrideContentType>({
-    defaultValues: {
-      memo: '',
-      title: '',
-    },
-  });
-
-  const onClickMenuNewContent = () => {
-    setIsNewContent(true);
-    reset();
-  };
-
-  const onClickEdit = async (uid: string, prideContent: PrideContentType) => {
-    setIsNewContent(false);
-
-    setEditContentUid(uid);
-    setEditData(prideContent);
-    setValue('memo', prideContent.memo);
-    setValue('title', prideContent.title);
-  };
-
-  const onClickDelete = async (uid: string) => {
-    deletePride(uid);
+  const onClickSubmit = async (data: PrideContentType) => {
+    await createPride(data);
     prideContentOwnListMutate();
   };
 
-  const onSubmit: SubmitHandler<InputFormPrideContentType> = async (
-    data: InputFormPrideContentType
-  ) => {
-    if (isNewContent) {
-      const submitData: PrideContentType = {
-        ...data,
-        uid: uid,
-        userName: user.displayName,
-        userPhotoURL: user.photoURL,
-        thumbsUsers: [],
-      };
-      await createPride(submitData);
-    } else {
-      const submitData: PrideContentType = {
-        ...editData,
-        ...data,
-      };
-      await updatePride(editContentUid, submitData);
-    }
-    await prideContentOwnListMutate();
-    setEditData(initializePrideContent);
-    setIsNewContent(true);
-    reset();
+  const onClickSubmitEdit = async (data: PrideContentType) => {
+    await updatePride(editPride.uid, data);
+    prideContentOwnListMutate();
   };
 
-  const OwnPrideContentList = () => {
-    if (isLoadingPrideContentOwnList || !prideContentOwnList) return <LoadingComponent />;
-    if (prideContentOwnList.length == 0)
-      return (
-        <div className="flex h-56 w-full items-center justify-center rounded-md border border-gray/70 text-2xl">
-          あなたの入力を待っています♡
-        </div>
-      );
-    return (
-      <>
-        {prideContentOwnList.map((content) => (
-          <OwnViewLandscapeCardComponent
-            key={content.uid}
-            prideContent={content.pride}
-            onClickDelete={() => onClickDelete(content.uid)}
-            onClickEdit={() => onClickEdit(content.uid, content.pride)}
-          />
-        ))}
-      </>
-    );
+  const openEditForm = (targetData: PrideContentFirestoreDataType) => {
+    setEditPride(targetData);
+    setIsModal(true);
   };
+
+  if (isLoadingPrideContentOwnList || !prideContentOwnList) return <LoadingComponent />;
 
   return (
     <>
-      <TitleComponent label={month + '月の自慢を書こう'} />
+      <Title label={month + '月の自慢を書こう'} />
       <div className="flex w-full items-start gap-3">
-        <div className="sticky top-3 flex w-full max-w-sm flex-col gap-5 rounded border border-gray/70 p-4">
-          <TabMenuContent isNewContent={isNewContent} onClickNewContent={onClickMenuNewContent} />
-          <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-5">
-            <InputItemComponent
-              name={'title'}
-              control={control}
-              rules={{
-                required: { value: true, message: 'アピールは書いてね♡' },
-                maxLength: { value: 20, message: '文字数は20文字以内です。' },
-              }}
-              label="アピールポイント"
-              validation="20文字以内"
-            />
-            <TextAreaItemComponent
-              name={'memo'}
-              control={control}
-              rules={{
-                maxLength: { value: 280, message: '文字数は280文字以内です。' },
-              }}
-              label="アピール内容"
-              validation="280文字以内"
-            />
-
-            <ButtonComponent color="default" label="投稿" />
-          </form>
-        </div>
+        <FormPride
+          prideContent={{
+            memo: '',
+            thumbsUsers: [],
+            title: '',
+            uid: uid,
+            userName: '',
+            userPhotoURL: '',
+          }}
+          onClickSubmit={onClickSubmit}
+        />
         <div className="flex w-full flex-col gap-10">
-          <OwnPrideContentList />
+          {prideContentOwnList.length == 0 && (
+            <div className="flex h-56 w-full items-center justify-center rounded-md border border-gray/70 text-2xl">
+              あなたの入力を待っています♡
+            </div>
+          )}
+          {prideContentOwnList.map((content) => (
+            <UserCard prideContent={content.pride} onClickOwnerEdit={() => openEditForm(content)} />
+          ))}
         </div>
       </div>
+      <FormLandscapePride
+        onClickDelete={() => deletePride(editPride.uid)}
+        onClickEdit={onClickSubmitEdit}
+        prideContent={editPride.pride}
+        openFlagState={modalState}
+      />
     </>
   );
 };

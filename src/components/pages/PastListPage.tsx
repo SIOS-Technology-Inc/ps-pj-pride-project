@@ -2,11 +2,10 @@ import { useState } from 'react';
 
 import { useFetchTargetMonthPrideList } from '@/hooks/useReadPrideContent';
 
-import { TitleComponent } from 'modules/TitleComponent';
-
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-import { PastViewLandscapeCardComponent } from '../modules/ViewComponent/ViewCardComponent';
+import { Title } from '../common/Title/Title';
+import { UserCard } from '../modules/UserCard/UserCard';
 
 export const PastListPage = () => {
   const nowDate = new Date();
@@ -41,7 +40,7 @@ export const PastListPage = () => {
     return (
       <>
         {prideContentTargetList.map((content) => (
-          <PastViewLandscapeCardComponent key={content.uid} prideContent={content.pride} />
+          <UserCard key={content.uid} prideContent={content.pride} />
         ))}
       </>
     );
@@ -49,7 +48,7 @@ export const PastListPage = () => {
 
   return (
     <>
-      <TitleComponent label="過去の情報" />
+      <Title label="過去の情報" />
       <div className="relative flex w-full flex-row items-start gap-4">
         <div className="sticky top-0 flex w-72 flex-col rounded-lg border border-gray/70 p-6">
           {prideMonthList.map((value) => (

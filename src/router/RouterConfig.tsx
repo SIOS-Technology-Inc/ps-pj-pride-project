@@ -4,7 +4,6 @@ import { TopLayout } from '@/components/layout/TopLayout';
 import { InputPage } from '@/components/pages/InputPage';
 import { NotFoundPage } from '@/components/pages/NotFountPage';
 import { PastListPage } from '@/components/pages/PastListPage';
-import { TestPage } from '@/components/pages/TestPage';
 import { ThumbsUpPage } from '@/components/pages/ThumbsUpPage';
 import { TopPage } from '@/components/pages/TopPage';
 
@@ -18,7 +17,6 @@ export const RouterConfig = () => {
           <Route path="thumbs-up" element={<ThumbsUpPage />} />
           <Route path="past" element={<PastListPage />} />
         </Route>
-        <Route path="test" element={<TestPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
