@@ -2,16 +2,16 @@ import { useState } from 'react';
 
 import { prideContent } from '@/constants/dummy/prideContent';
 
-import { FormLandscapePride } from './FormLandscapePride';
+import { EditFormPride } from './FormModalPride';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'modules/FormLandscapePride',
-  component: FormLandscapePride,
+  title: 'object/FormModalPride',
+  component: EditFormPride,
   tags: ['autodocs'],
   argTypes: {},
-} satisfies Meta<typeof FormLandscapePride>;
+} satisfies Meta<typeof EditFormPride>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -28,7 +28,7 @@ export const Primary: Story = {
       <>
         <div style={{ width: '100wh', height: '100vh', position: 'relative' }}>
           <button onClick={() => setOpenFlag((value) => !value)}>open</button>
-          <FormLandscapePride {...args} openFlagState={flag} />
+          <EditFormPride {...args} openFlagState={flag} />
         </div>
       </>
     );

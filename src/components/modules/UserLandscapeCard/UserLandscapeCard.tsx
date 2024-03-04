@@ -1,13 +1,14 @@
 import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
 import { ThumbsUpButton } from '@/components/common/ThumbsUpButton/ThumbsUpButton';
+import { ViewTabStyle } from '@/constants/ViewTabStyle';
 import { PrideContentType } from '@/types/contentsType';
 
 type UserLandscapeDetailCardProps = {
   prideContent: PrideContentType;
   onClick: () => void;
   ownerFlag: boolean;
-  design: 'simple' | 'detail';
+  design: keyof typeof ViewTabStyle;
 };
 
 export const UserLandscapeCard = ({

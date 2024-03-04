@@ -6,7 +6,7 @@ export default function (/** @type {import('plop').NodePlopAPI} */ plop) {
         type: 'list',
         name: 'componentType',
         message: 'Component type',
-        choices: ['common', 'modules'],
+        choices: ['common', 'modules', 'object'],
       },
       {
         type: 'input',

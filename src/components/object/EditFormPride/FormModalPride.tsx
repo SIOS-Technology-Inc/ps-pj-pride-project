@@ -5,14 +5,14 @@ import { Button } from '@/components/common/Button/Button';
 import { FormPride } from '@/components/modules/FormPride/FormPride';
 import { PrideContentType } from '@/types/contentsType';
 
-type FormLandscapePrideProps = {
+type EditFormPrideProps = {
   prideContent: PrideContentType;
   onClickEdit: (data: PrideContentType) => void;
   onClickDelete: () => void;
   openFlagState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 };
 
-export const FormLandscapePride = (props: FormLandscapePrideProps) => {
+export const EditFormPride = (props: EditFormPrideProps) => {
   const { prideContent, onClickEdit, onClickDelete, openFlagState } = props;
   const [openFlag, setOpenFlag] = openFlagState;
 
@@ -24,8 +24,8 @@ export const FormLandscapePride = (props: FormLandscapePrideProps) => {
     e.stopPropagation();
   };
   const { top } = useSpring({
+    from: { top: '-100vh' },
     to: { top: openFlag ? '0' : '-100vh' },
-    from: { top: '0' },
   });
   return (
     <>

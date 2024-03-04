@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const RouterAuthenticatedCheck = (props: Props) => {
+export const HasAuthenticationRouter = (props: Props) => {
   const { children } = props;
   const { signInAction } = useFirebaseAuth();
 
