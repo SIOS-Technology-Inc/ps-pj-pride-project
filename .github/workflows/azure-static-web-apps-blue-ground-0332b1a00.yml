@@ -29,6 +29,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
           cache-dependency-path: './yarn.lock'
+      - name: remove storybook
+        run: rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx
 
       - name: Build And Deploy
         id: builddeploy
