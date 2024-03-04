@@ -1,5 +1,8 @@
+import { FiEdit } from 'react-icons/fi';
+
 import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
+import { IconButton } from '@/components/common/IconButton/IconButton';
 import { PrideContentType } from '@/types/contentsType';
 
 type UserCardProps = {
@@ -13,7 +16,13 @@ export const UserCard = (props: UserCardProps) => {
   return (
     <>
       <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
-        {ownerEditClick && <span onClick={ownerEditClick}>edit</span>}
+        {ownerEditClick && (
+          <div className="flex items-center justify-end">
+            <IconButton label="編集" onClick={ownerEditClick}>
+              <FiEdit />
+            </IconButton>
+          </div>
+        )}
         <div className="flex flex-row">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">

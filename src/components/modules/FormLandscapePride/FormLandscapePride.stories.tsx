@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { prideContent } from '@/constants/dummy/prideContent';
 
 import { FormLandscapePride } from './FormLandscapePride';
@@ -18,5 +20,17 @@ export const Primary: Story = {
   args: {
     prideContent: prideContent,
     openFlagState: [false, (value) => !value],
+  },
+  render: function Comp(args) {
+    const flag = useState(true);
+    const [, setOpenFlag] = flag;
+    return (
+      <>
+        <div style={{ width: '100wh', height: '100vh', position: 'relative' }}>
+          <button onClick={() => setOpenFlag((value) => !value)}>open</button>
+          <FormLandscapePride {...args} openFlagState={flag} />
+        </div>
+      </>
+    );
   },
 };

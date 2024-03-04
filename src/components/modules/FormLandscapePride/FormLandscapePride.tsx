@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-
+import { animated, useSpring } from '@react-spring/web';
 import { RxCross1 } from 'react-icons/rx';
 
 import { Button } from '@/components/common/Button/Button';
@@ -17,27 +16,6 @@ export const FormLandscapePride = (props: FormLandscapePrideProps) => {
   const { prideContent, onClickEdit, onClickDelete, openFlagState } = props;
   const [openFlag, setOpenFlag] = openFlagState;
 
-  useEffect(() => {
-    // 背景画面固定用関数
-    const registerBackgroundFixed = () => {
-      const body = document.body;
-      const scrollWidth = window.innerWidth - body.clientWidth;
-      body.style.marginRight = `${scrollWidth}px`;
-      body.style.overflowY = 'hidden';
-    };
-    // 背景画面固定解除用関数
-    const unRegisterBackgroundFixed = () => {
-      const body = document.body;
-      body.style.overflowY = '';
-      body.style.marginRight = '';
-    };
-    if (openFlag) registerBackgroundFixed();
-
-    return () => {
-      unRegisterBackgroundFixed();
-    };
-  }, [openFlag]);
-
   const onClickBackground = () => {
     setOpenFlag(false);
   };
@@ -45,13 +23,17 @@ export const FormLandscapePride = (props: FormLandscapePrideProps) => {
   const onClickCard = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
   };
+  const { top } = useSpring({
+    to: { top: openFlag ? '0' : '-100vh' },
+    from: { top: '0' },
+  });
   return (
     <>
-      <div
+      <animated.div
         className={
-          'fixed flex flex-col items-center justify-center overflow-hidden bg-gray/70 transition-all ' +
-          (openFlag ? ' top-0 left-0 h-screen w-screen ' : ' top-1/2 left-1/2 h-0 w-0 ')
+          'fixed left-0 flex h-screen w-full flex-col items-center  justify-center overflow-hidden bg-gray/70'
         }
+        style={{ top: top }}
         onClick={onClickBackground}
       >
         <div className="relative flex w-3/4 max-w-3xl items-center rounded-xl bg-white p-8">
@@ -70,7 +52,7 @@ export const FormLandscapePride = (props: FormLandscapePrideProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </animated.div>
     </>
   );
 };

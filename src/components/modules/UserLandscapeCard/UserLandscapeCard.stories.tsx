@@ -1,15 +1,15 @@
 import { prideContent } from '@/constants/dummy/prideContent';
 
-import { UserLandscapeSimpleCard } from './UserLandscapeSimpleCard';
+import { UserLandscapeCard } from './UserLandscapeCard';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'modules/UserLandscapeSimpleCard',
-  component: UserLandscapeSimpleCard,
+  title: 'modules/UserLandscapeCard',
+  component: UserLandscapeCard,
   tags: ['autodocs'],
   argTypes: {},
-} satisfies Meta<typeof UserLandscapeSimpleCard>;
+} satisfies Meta<typeof UserLandscapeCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -18,5 +18,6 @@ export const Primary: Story = {
   args: {
     prideContent: prideContent,
     ownerFlag: false,
+    design: 'detail',
   },
 };

@@ -7,10 +7,15 @@ type UserLandscapeDetailCardProps = {
   prideContent: PrideContentType;
   onClick: () => void;
   ownerFlag: boolean;
+  design: 'simple' | 'detail';
 };
 
-export const UserLandscapeDetailCard = (props: UserLandscapeDetailCardProps) => {
-  const { prideContent, onClick, ownerFlag } = props;
+export const UserLandscapeCard = ({
+  design = 'detail',
+  onClick,
+  ownerFlag,
+  prideContent,
+}: UserLandscapeDetailCardProps) => {
   const { userName, thumbsUsers, title, userPhotoURL, memo } = prideContent;
 
   return (
@@ -29,14 +34,16 @@ export const UserLandscapeDetailCard = (props: UserLandscapeDetailCardProps) => 
             <ThumbsUpButton onClick={() => onClick()} disable={ownerFlag} />
           </div>
         </div>
-        {memo != '' ? (
-          <div className="flex w-full flex-row gap-2">
-            <CardContent content={memo} />
-          </div>
-        ) : (
+        {design === 'simple' ? (
           <></>
+        ) : (
+          <>
+            <div className="flex w-full flex-row gap-2">
+              <CardContent content={memo} />
+            </div>
+            <CardImagesListContent label="いいね！" contents={thumbsUsers} />
+          </>
         )}
-        <CardImagesListContent label="いいね！" contents={thumbsUsers} />
       </div>
     </>
   );

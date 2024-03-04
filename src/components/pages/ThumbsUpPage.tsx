@@ -9,8 +9,7 @@ import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { Title } from '../common/Title/Title';
-import { UserLandscapeDetailCard } from '../modules/UserLandscapeDetailCard/UserLandscapeDetailCard';
-import { UserLandscapeSimpleCard } from '../modules/UserLandscapeSimpleCard/UserLandscapeSimpleCard';
+import { UserLandscapeCard } from '../modules/UserLandscapeCard/UserLandscapeCard';
 
 export const ThumbsUpPage = () => {
   const date = new Date();
@@ -36,43 +35,23 @@ export const ThumbsUpPage = () => {
   if (isLoadingPrideContent || !prideContentList) return <LoadingComponent />;
 
   const ViewCardComponent = () => {
-    if (viewType == 'detail') {
-      return (
-        <>
-          <div className="flex w-full flex-col gap-10">
-            {prideContentList.map((content) => (
-              <UserLandscapeDetailCard
-                key={content.uid}
-                prideContent={content.pride}
-                onClick={() => onClickThumbsUpButton(content.uid)}
-                ownerFlag={
-                  content.pride.thumbsUsers.includes(user.photoURL) || uid == content.pride.uid
-                }
-              />
-            ))}
-          </div>
-        </>
-      );
-    }
-    if (viewType == 'simple') {
-      return (
-        <>
-          <div className="flex w-full flex-col gap-2">
-            {prideContentList.map((content) => (
-              <UserLandscapeSimpleCard
-                key={content.uid}
-                prideContent={content.pride}
-                onClick={() => onClickThumbsUpButton(content.uid)}
-                ownerFlag={
-                  content.pride.thumbsUsers.includes(user.photoURL) || uid == content.pride.uid
-                }
-              />
-            ))}
-          </div>
-        </>
-      );
-    }
-    return <></>;
+    return (
+      <>
+        <div className="flex w-full flex-col gap-10">
+          {prideContentList.map((content) => (
+            <UserLandscapeCard
+              key={content.uid}
+              prideContent={content.pride}
+              onClick={() => onClickThumbsUpButton(content.uid)}
+              ownerFlag={
+                content.pride.thumbsUsers.includes(user.photoURL) || uid == content.pride.uid
+              }
+              design={viewType}
+            />
+          ))}
+        </div>
+      </>
+    );
   };
 
   return (

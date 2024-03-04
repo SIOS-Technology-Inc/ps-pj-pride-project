@@ -44,6 +44,12 @@ export const InputPage = () => {
 
   const onClickSubmitEdit = async (data: PrideContentType) => {
     await updatePride(editPride.uid, data);
+    setIsModal(false);
+    prideContentOwnListMutate();
+  };
+  const onClickDelete = async () => {
+    await deletePride(editPride.uid);
+    setIsModal(false);
     prideContentOwnListMutate();
   };
 
@@ -81,7 +87,7 @@ export const InputPage = () => {
         </div>
       </div>
       <FormLandscapePride
-        onClickDelete={() => deletePride(editPride.uid)}
+        onClickDelete={onClickDelete}
         onClickEdit={onClickSubmitEdit}
         prideContent={editPride.pride}
         openFlagState={modalState}
