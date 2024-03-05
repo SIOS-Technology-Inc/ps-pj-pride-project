@@ -13,9 +13,9 @@ export const fetchPridePastOneMonthAgo = async () => {
   const res = await axiosClient.get<PrideList>('/api/pride/past');
   return res.data;
 };
-export const patchPrideThumbsup = async (userID: string, uid: string, userPhoto: string) => {
+export const patchPrideThumbsup = async (uid: string, userPhoto: string) => {
   const patchData = {
-    ref: `users/${userID}/prides/${uid}`,
+    ref: `${uid}`,
     userPhoto: userPhoto,
   };
   await axiosClient.patch(`/api/pride/thumbsup/`, patchData);

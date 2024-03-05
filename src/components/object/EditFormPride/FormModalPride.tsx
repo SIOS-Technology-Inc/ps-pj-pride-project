@@ -3,11 +3,12 @@ import { RxCross1 } from 'react-icons/rx';
 
 import { Button } from '@/components/common/Button/Button';
 import { FormPride } from '@/components/modules/FormPride/FormPride';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
+import { InputFormPrideContentType } from '@/types/contentsType';
 
 type EditFormPrideProps = {
   prideContent: PrideContentType;
-  onClickEdit: (data: PrideContentType) => void;
+  onClickEdit: (data: InputFormPrideContentType) => void;
   onClickDelete: () => void;
   openFlagState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 };

@@ -2,7 +2,7 @@ import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
 import { ThumbsUpButton } from '@/components/common/ThumbsUpButton/ThumbsUpButton';
 import { ViewTabStyle } from '@/constants/ViewTabStyle';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type UserLandscapeDetailCardProps = {
   prideContent: PrideContentType;
@@ -17,7 +17,7 @@ export const UserLandscapeCard = ({
   ownerFlag,
   prideContent,
 }: UserLandscapeDetailCardProps) => {
-  const { userName, thumbsUsers, title, userPhotoURL, memo } = prideContent;
+  const { userName, thumbsupUsers, title, userPhotoURL, memo } = prideContent;
 
   return (
     <>
@@ -31,7 +31,7 @@ export const UserLandscapeCard = ({
             <h2 className="grow text-2xl">{title}</h2>
           </div>
           <div className="flex flex-row items-center gap-4">
-            <span className="text-lg">{thumbsUsers.length}</span>
+            <span className="text-lg">{thumbsupUsers.length}</span>
             <ThumbsUpButton onClick={() => onClick()} disable={ownerFlag} />
           </div>
         </div>
@@ -42,7 +42,7 @@ export const UserLandscapeCard = ({
             <div className="flex w-full flex-row gap-2">
               <CardContent content={memo} />
             </div>
-            <CardImagesListContent label="いいね！" contents={thumbsUsers} />
+            <CardImagesListContent label="いいね！" contents={thumbsupUsers} />
           </>
         )}
       </div>

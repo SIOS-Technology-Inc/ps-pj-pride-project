@@ -1,13 +1,15 @@
-export type PrideContent = {
+export type PrideContentType = {
   uid: string;
   userID: string;
   title: string;
   memo: string;
-  thumbsupUsers: [];
+  userName: string;
+  userPhotoURL: string;
+  thumbsupUsers: string[];
   thumbsupCount: number;
   createdAt: Date;
 };
 
 export type PrideList = {
-  prides: PrideContent[];
+  prides: PrideContentType[];
 };

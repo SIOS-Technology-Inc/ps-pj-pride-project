@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import { fetchPrides } from '@/api/usersPride';
+import { createPride, deletePride, fetchPrides, updatePride } from '@/api/usersPride';
 import { InputFormPrideContentType } from '@/types/contentsType';
 
 export const useUserPride = () => {
@@ -10,18 +10,24 @@ export const useUserPride = () => {
     mutate: userDataRefresh,
   } = useSWR('ownPride', fetchPrides);
 
-  const createPride = async (data: InputFormPrideContentType) => {
+  const createPrideFunction = async (data: InputFormPrideContentType) => {
     await createPride(data);
     userDataRefresh();
   };
-  const updatePride = async (uid: string, data: InputFormPrideContentType) => {
+  const updatePrideFunction = async (uid: string, data: InputFormPrideContentType) => {
     await updatePride(uid, data);
     userDataRefresh();
   };
-  const deletePride = async (uid: string) => {
+  const deletePrideFunction = async (uid: string) => {
     await deletePride(uid);
     userDataRefresh();
   };
 
-  return { ownPrideList, isLoadingOwnPrideList, createPride, updatePride, deletePride };
+  return {
+    ownPrideList,
+    isLoadingOwnPrideList,
+    createPrideFunction,
+    updatePrideFunction,
+    deletePrideFunction,
+  };
 };

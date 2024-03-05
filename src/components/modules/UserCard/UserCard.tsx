@@ -3,7 +3,7 @@ import { FiEdit } from 'react-icons/fi';
 import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
 import { IconButton } from '@/components/common/IconButton/IconButton';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type UserCardProps = {
   prideContent: PrideContentType;
@@ -12,7 +12,7 @@ type UserCardProps = {
 
 export const UserCard = (props: UserCardProps) => {
   const { prideContent, onClickOwnerEdit: ownerEditClick } = props;
-  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsupUsers, title, userPhotoURL } = prideContent;
   return (
     <>
       <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
@@ -39,7 +39,7 @@ export const UserCard = (props: UserCardProps) => {
         ) : (
           <></>
         )}
-        <CardImagesListContent label="いいね！" contents={thumbsUsers} />
+        <CardImagesListContent label="いいね！" contents={thumbsupUsers} />
       </div>
     </>
   );

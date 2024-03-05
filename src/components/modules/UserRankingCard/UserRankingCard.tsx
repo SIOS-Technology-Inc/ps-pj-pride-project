@@ -1,6 +1,6 @@
 import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type UserRankingCardProps = {
   prideContent: PrideContentType;
@@ -9,7 +9,7 @@ type UserRankingCardProps = {
 
 export const UserRankingCard = (props: UserRankingCardProps) => {
   const { prideContent, rank } = props;
-  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsupUsers, title, userPhotoURL } = prideContent;
 
   return (
     <>
@@ -31,7 +31,7 @@ export const UserRankingCard = (props: UserRankingCardProps) => {
             ) : (
               <></>
             )}
-            <CardImagesListContent label="いいね！" contents={thumbsUsers} />
+            <CardImagesListContent label="いいね！" contents={thumbsupUsers} />
           </div>
         </div>
       </div>

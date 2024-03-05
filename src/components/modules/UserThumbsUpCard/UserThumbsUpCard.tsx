@@ -1,7 +1,7 @@
 import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
 import { ThumbsUpButton } from '@/components/common/ThumbsUpButton/ThumbsUpButton';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type UserThumbsUpCardProps = {
   prideContent: PrideContentType;
@@ -11,7 +11,7 @@ type UserThumbsUpCardProps = {
 
 export const UserThumbsUpCard = (props: UserThumbsUpCardProps) => {
   const { prideContent, onClick, ownerFlag } = props;
-  const { userName, memo, thumbsUsers, title, userPhotoURL } = prideContent;
+  const { userName, memo, thumbsupUsers, title, userPhotoURL } = prideContent;
   return (
     <>
       <div className="flex w-full max-w-sm flex-col gap-5 rounded-lg border border-gray/70 p-3">
@@ -31,7 +31,7 @@ export const UserThumbsUpCard = (props: UserThumbsUpCardProps) => {
           ) : (
             <></>
           )}
-          <CardImagesListContent label="いいね！" contents={thumbsUsers} />
+          <CardImagesListContent label="いいね！" contents={thumbsupUsers} />
         </div>
       </div>
     </>
