@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
 
@@ -7,12 +8,7 @@ import { useFirebaseAuth } from '@/hooks/useAuth';
 import { auth } from '@/auth/authFirebase';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export const HasAuthenticationRouter = (props: Props) => {
-  const { children } = props;
+export const HasAuthenticationRouter = () => {
   const { signInAction } = useFirebaseAuth();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,5 +23,9 @@ export const HasAuthenticationRouter = (props: Props) => {
 
   if (loading || auth.currentUser == null) return <LoadingComponent />;
 
-  return <>{children}</>;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };

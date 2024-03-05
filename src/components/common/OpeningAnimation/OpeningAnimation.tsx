@@ -192,7 +192,7 @@ export const OpeningAnimation = () => {
       style={{ height: fadeParent.height }}
     >
       {items.map((Item, index) => (
-        <Item opacity={springs[index].opacity} />
+        <Item key={index} opacity={springs[index].opacity} />
       ))}
     </animated.div>
   );
