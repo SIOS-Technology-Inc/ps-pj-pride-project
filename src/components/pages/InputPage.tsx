@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useFirebaseAuth } from '@/hooks/useAuth';
+import { useAuthenticated } from '@/hooks/useAuth';
 import { usePrideContent } from '@/hooks/usePrideContent';
 import { useFetchThisMonthOwnPrideContentList } from '@/hooks/useReadPrideContent';
 
@@ -17,7 +17,7 @@ export const InputPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { uid } = useFirebaseAuth();
+  const { uid } = useAuthenticated();
   const { createPride, deletePride, updatePride } = usePrideContent();
   const initPrideContent: PrideContentType = {
     memo: '',

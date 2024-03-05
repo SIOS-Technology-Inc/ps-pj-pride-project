@@ -3,13 +3,13 @@ import { Outlet } from 'react-router-dom';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
 
-import { useFirebaseAuth } from '@/hooks/useAuth';
+import { useAuthAction } from '@/hooks/useAuth';
 
 import { auth } from '@/auth/authFirebase';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 export const HasAuthenticationRouter = () => {
-  const { signInAction } = useFirebaseAuth();
+  const { signInAction } = useAuthAction();
 
   const [loading, setLoading] = useState<boolean>(true);
 

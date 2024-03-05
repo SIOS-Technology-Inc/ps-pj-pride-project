@@ -1,4 +1,4 @@
-import { useFirebaseAuth } from '@/hooks/useAuth';
+import { useAuthenticated } from '@/hooks/useAuth';
 import { usePrideContent } from '@/hooks/usePrideContent';
 import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
 
@@ -11,7 +11,7 @@ export const ThumbsUpPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { user, uid } = useFirebaseAuth();
+  const { user, uid } = useAuthenticated();
   const { pushLikeForPride } = usePrideContent();
   const { prideContentList, isLoadingPrideContent, prideContentMutate } =
     useFetchThisMonthPrideList();

@@ -1,4 +1,4 @@
-import { useFirebaseAuth } from '@/hooks/useAuth';
+import { useAuthenticated } from '@/hooks/useAuth';
 import { useFetchLastMonthRankingTop3 } from '@/hooks/useReadPrideContent';
 
 import { RankingTop3 } from '@/components/object/RankingTop3/RankingTop3';
@@ -7,7 +7,7 @@ import { LoadingComponent } from '@/utilities/LoadingComponent';
 import { Title } from '../common/Title/Title';
 
 export const TopPage = () => {
-  const { user } = useFirebaseAuth();
+  const { user } = useAuthenticated();
   const { prideContentRankingList, isLoadingPrideContentRanking } = useFetchLastMonthRankingTop3();
 
   if (isLoadingPrideContentRanking || !prideContentRankingList) return <LoadingComponent />;
