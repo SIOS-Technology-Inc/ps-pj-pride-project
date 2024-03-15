@@ -14,8 +14,8 @@ export const usePrideWithinOneMonth = () => {
     mutate,
   } = useSWR('prideWithinOneMonth', fetchPrideWithinOneMonth);
 
-  const onClickThumbsUpButtonFunction = async (uid: string, userPhoto: string) => {
-    await patchPrideThumbsup(uid, userPhoto);
+  const onClickThumbsUpButtonFunction = async (uid: string) => {
+    await patchPrideThumbsup(uid);
     mutate();
   };
   return {

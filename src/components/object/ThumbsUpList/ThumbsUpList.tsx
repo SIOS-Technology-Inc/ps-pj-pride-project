@@ -13,7 +13,7 @@ type ThumbsUpListProps = {
 };
 
 export const ThumbsUpList = (props: ThumbsUpListProps) => {
-  const { prides, onClickThumbsUpButton, userID, photoURL } = props;
+  const { prides, onClickThumbsUpButton, userID } = props;
   const [viewType, setViewType] = useState<keyof typeof ViewTabStyle>('detail');
   const onClickViewType = (value: keyof typeof ViewTabStyle) => {
     setViewType(value);
@@ -27,7 +27,7 @@ export const ThumbsUpList = (props: ThumbsUpListProps) => {
             key={content.uid}
             prideContent={content}
             onClick={() => onClickThumbsUpButton(content.uid)}
-            ownerFlag={content.thumbsupUsers.includes(photoURL) || userID == content.userID}
+            ownerFlag={userID == content.userID}
             design={viewType}
           />
         ))}
