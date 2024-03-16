@@ -16,10 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    prides: [
-      { pride: prideContent, uid: '1' },
-      { pride: prideContent, uid: '1' },
-      { pride: prideContent, uid: '1' },
-    ],
+    prides: [prideContent, prideContent, prideContent],
   },
 };
