@@ -1,6 +1,6 @@
 import { usePridePastOneMonthAgo } from '@/hooks/usePride';
 
-import { UserPrideList } from '@/components/object/UserPrideList/UserPrideList';
+import { UserPrideList } from '@/components/templates/UserPrideList/UserPrideList';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { Title } from '../common/Title/Title';

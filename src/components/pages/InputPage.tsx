@@ -4,8 +4,8 @@ import { useAuthenticated } from '@/hooks/useAuth';
 import { useUserPride } from '@/hooks/useUserPride';
 
 import { FormPride } from '@/components/modules/FormPride/FormPride';
-import { EditFormPride } from '@/components/object/EditFormPride/FormModalPride';
-import { UserPrideList } from '@/components/object/UserPrideList/UserPrideList';
+import { EditFormPride } from '@/components/templates/EditFormPride/FormModalPride';
+import { UserPrideList } from '@/components/templates/UserPrideList/UserPrideList';
 import { PrideContentType } from '@/types/contentPride.type';
 import { InputFormPrideContentType } from '@/types/contentsType';
 import { LoadingComponent } from '@/utilities/LoadingComponent';

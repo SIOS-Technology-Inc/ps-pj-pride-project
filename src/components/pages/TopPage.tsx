@@ -1,7 +1,7 @@
 import { useAuthenticated } from '@/hooks/useAuth';
 import { usePrideWithinOneMonthRankingTop3 } from '@/hooks/usePride';
 
-import { RankingTop3 } from '@/components/object/RankingTop3/RankingTop3';
+import { RankingTop3 } from '@/components/templates/RankingTop3/RankingTop3';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { Title } from '../common/Title/Title';

@@ -1,7 +1,7 @@
 import { useAuthenticated } from '@/hooks/useAuth';
 import { usePrideWithinOneMonth } from '@/hooks/usePride';
 
-import { ThumbsUpList } from '@/components/object/ThumbsUpList/ThumbsUpList';
+import { ThumbsUpList } from '@/components/templates/ThumbsUpList/ThumbsUpList';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { Title } from '../common/Title/Title';
