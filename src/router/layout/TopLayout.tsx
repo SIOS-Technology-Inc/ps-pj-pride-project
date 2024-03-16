@@ -24,9 +24,9 @@ export const TopLayout = () => {
 
   return (
     <>
-      <section className="flex h-full min-h-screen w-full flex-col items-center font-zen">
+      <section className=" flex h-full min-h-screen w-full flex-col items-center font-zen">
         <Header user={user} />
-        <main className="my-10 flex w-full max-w-5xl grow flex-col items-center gap-12 ">
+        <main className=" my-10 flex w-full max-w-5xl grow flex-col items-center gap-12">
           <Menu>
             <MenuItem
               path={() => navigate('/')}

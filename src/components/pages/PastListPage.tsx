@@ -1,6 +1,6 @@
 import { usePridePastOneMonthAgo } from '@/hooks/usePride';
 
-import { UserPrideList } from '@/components/templates/UserPrideList/UserPrideList';
+import { PastList } from '@/components/templates/PastList/PastList';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 import { Title } from '../common/Title/Title';
@@ -11,11 +11,7 @@ export const PastListPage = () => {
   return (
     <>
       <Title label="過去の情報" />
-      <div className="relative flex w-full flex-row items-start gap-4">
-        <div className="flex w-full flex-col gap-2">
-          <UserPrideList prides={prideListPastOneMonthAgo.prides} />
-        </div>
-      </div>
+      <PastList prides={prideListPastOneMonthAgo.prides} />
     </>
   );
 };

@@ -2,12 +2,12 @@ import { CardContent } from '@/components/common/CardContent/CardContent';
 import { CardImagesListContent } from '@/components/common/CardImagesListContent/CardImagesListContent';
 import { PrideContentType } from '@/types/contentPride.type';
 
-type UserRankingCardProps = {
+type PrideRankingCardProps = {
   prideContent: PrideContentType;
   rank: number;
 };
 
-export const UserRankingCard = (props: UserRankingCardProps) => {
+export const PrideRankingCard = (props: PrideRankingCardProps) => {
   const { prideContent, rank } = props;
   const { userName, memo, thumbsupUsers, title, userPhotoURL } = prideContent;
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import { UserLandscapeCard } from '@/components/modules/UserLandscapeCard/UserLandscapeCard';
+import { PrideThumbsUpDetailCard } from '@/components/modules/PrideThumbsUpDetailCard/PrideThumbsUpDetailCard';
+import { PrideThumbsUpSimpleCard } from '@/components/modules/PrideThumbsUpSimpleCard/PrideThumbsUpSimpleCard';
 import { ViewTypeTab } from '@/components/modules/ViewTypeTab/ViewTypeTab';
 import { ViewTabStyle } from '@/constants/ViewTabStyle';
 import { PrideContentType } from '@/types/contentPride.type';
@@ -18,19 +19,39 @@ export const ThumbsUpList = (props: ThumbsUpListProps) => {
   const onClickViewType = (value: keyof typeof ViewTabStyle) => {
     setViewType(value);
   };
+  const groupStyle = {
+    simple: 'gap-2',
+    detail: 'gap-10',
+  } as const satisfies Record<keyof typeof ViewTabStyle, string>;
+
   return (
     <>
       <ViewTypeTab select={viewType} onClick={onClickViewType} />
-      <div className="flex w-full flex-col gap-10">
-        {prides.map((content) => (
-          <UserLandscapeCard
-            key={content.uid}
-            prideContent={content}
-            onClick={() => onClickThumbsUpButton(content.uid)}
-            ownerFlag={userID == content.userID}
-            design={viewType}
-          />
-        ))}
+      <div className={'flex w-full flex-col ' + groupStyle[viewType]}>
+        {prides.length === 0 && <div className="">まだ投稿がありません</div>}
+        {viewType === 'simple' ? (
+          <>
+            {prides.map((content) => (
+              <PrideThumbsUpSimpleCard
+                key={content.uid}
+                prideContent={content}
+                onClick={() => onClickThumbsUpButton(content.uid)}
+                ownerFlag={userID == content.userID}
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            {prides.map((content) => (
+              <PrideThumbsUpDetailCard
+                key={content.uid}
+                prideContent={content}
+                onClick={() => onClickThumbsUpButton(content.uid)}
+                ownerFlag={userID == content.userID}
+              />
+            ))}
+          </>
+        )}
       </div>
     </>
   );
