@@ -7,7 +7,7 @@ import { EditFormPride } from './FormModalPride';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'object/FormModalPride',
+  title: 'templates/FormModalPride',
   component: EditFormPride,
   tags: ['autodocs'],
   argTypes: {},

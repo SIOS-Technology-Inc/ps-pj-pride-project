@@ -5,7 +5,7 @@ import { ThumbsUpList } from './ThumbsUpList';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'object/ThumbsUpList',
+  title: 'templates/ThumbsUpList',
   component: ThumbsUpList,
   tags: ['autodocs'],
   argTypes: {},

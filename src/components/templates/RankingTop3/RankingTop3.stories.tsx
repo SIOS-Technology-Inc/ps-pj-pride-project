@@ -5,7 +5,7 @@ import { RankingTop3 } from './RankingTop3';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'object/RankingTop3',
+  title: 'templates/RankingTop3',
   component: RankingTop3,
   tags: ['autodocs'],
   argTypes: {},

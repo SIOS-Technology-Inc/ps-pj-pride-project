@@ -1,15 +1,15 @@
 import { prideContent } from '@/constants/dummy/prideContent';
 
-import { UserPrideList } from './UserPrideList';
+import { PastList } from './PastList';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'templates/UserPrideList',
-  component: UserPrideList,
+  title: 'templates/PastList',
+  component: PastList,
   tags: ['autodocs'],
   argTypes: {},
-} satisfies Meta<typeof UserPrideList>;
+} satisfies Meta<typeof PastList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

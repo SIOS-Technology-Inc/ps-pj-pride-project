@@ -19,9 +19,14 @@ export const UserLandscapeCard = ({
 }: UserLandscapeDetailCardProps) => {
   const { userName, thumbsupUsers, title, userPhotoURL, memo } = prideContent;
 
+  const designStyle = {
+    simple: '',
+    detail: ' border border-gray/70 p-3',
+  } as const satisfies Record<string, string>;
+
   return (
     <>
-      <div className="flex w-full flex-col gap-5 rounded-lg border border-gray/70 p-3">
+      <div className={'flex w-full flex-col gap-5 rounded-lg p-3 ' + designStyle[design]}>
         <div className="flex flex-row justify-between">
           <div className="flex grow flex-row gap-4">
             <div className="flex flex-row items-center gap-2">
