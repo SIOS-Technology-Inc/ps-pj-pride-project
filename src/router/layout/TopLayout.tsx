@@ -6,17 +6,18 @@ import InputLinkImage from 'src/assets/input-link.png';
 import PastLinkImage from 'src/assets/past-link.png';
 import TopLinkImage from 'src/assets/top-link.png';
 
-import { useFirebaseAuth } from '@/hooks/useAuth';
+import { useAuthenticated } from '@/hooks/useAuth';
 
 import { Footer } from '@/components/common/Footer/Footer';
 import { Header } from '@/components/common/Header/Header';
 import { MenuItem } from '@/components/common/MenuItem/MenuItem';
 import { Menu } from '@/components/modules/Menu/Menu';
+import { AxiosConfig } from '@/utilities/AxiosConfig';
 import { ErrorBoundaryComponent } from '@/utilities/ErrorBoundary';
 import { SWRConfigComponent } from '@/utilities/SwrConfig';
 
 export const TopLayout = () => {
-  const { user } = useFirebaseAuth();
+  const { user } = useAuthenticated();
   const location = useLocation();
   const pathName = useMemo(() => location.pathname, [location]);
   const navigate = useNavigate();
@@ -57,9 +58,11 @@ export const TopLayout = () => {
             />
           </Menu>
           <ErrorBoundaryComponent>
-            <SWRConfigComponent>
-              <Outlet />
-            </SWRConfigComponent>
+            <AxiosConfig>
+              <SWRConfigComponent>
+                <Outlet />
+              </SWRConfigComponent>
+            </AxiosConfig>
           </ErrorBoundaryComponent>
         </main>
         <Footer />

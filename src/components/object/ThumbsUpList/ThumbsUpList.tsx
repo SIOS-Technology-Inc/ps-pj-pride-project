@@ -3,17 +3,17 @@ import { useState } from 'react';
 import { UserLandscapeCard } from '@/components/modules/UserLandscapeCard/UserLandscapeCard';
 import { ViewTypeTab } from '@/components/modules/ViewTypeTab/ViewTypeTab';
 import { ViewTabStyle } from '@/constants/ViewTabStyle';
-import { PrideContentFirestoreDataType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type ThumbsUpListProps = {
-  prides: PrideContentFirestoreDataType[];
+  prides: PrideContentType[];
   onClickThumbsUpButton: (uid: string) => void;
   userID: string;
   photoURL: string;
 };
 
 export const ThumbsUpList = (props: ThumbsUpListProps) => {
-  const { prides, onClickThumbsUpButton, userID, photoURL } = props;
+  const { prides, onClickThumbsUpButton, userID } = props;
   const [viewType, setViewType] = useState<keyof typeof ViewTabStyle>('detail');
   const onClickViewType = (value: keyof typeof ViewTabStyle) => {
     setViewType(value);
@@ -25,9 +25,9 @@ export const ThumbsUpList = (props: ThumbsUpListProps) => {
         {prides.map((content) => (
           <UserLandscapeCard
             key={content.uid}
-            prideContent={content.pride}
+            prideContent={content}
             onClick={() => onClickThumbsUpButton(content.uid)}
-            ownerFlag={content.pride.thumbsUsers.includes(photoURL) || userID == content.pride.uid}
+            ownerFlag={userID == content.userID}
             design={viewType}
           />
         ))}

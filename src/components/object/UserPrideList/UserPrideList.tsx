@@ -1,9 +1,9 @@
 import { UserCard } from '@/components/modules/UserCard/UserCard';
-import { PrideContentFirestoreDataType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type UserPrideListProps = {
-  prides: PrideContentFirestoreDataType[];
-  onClickOwnerPride: (targetData: PrideContentFirestoreDataType) => void;
+  prides: PrideContentType[];
+  onClickOwnerPride?: (targetData: PrideContentType) => void;
 };
 
 export const UserPrideList = (props: UserPrideListProps) => {
@@ -15,12 +15,15 @@ export const UserPrideList = (props: UserPrideListProps) => {
           あなたの入力を待っています♡
         </div>
       )}
-      {prides.map((content) => (
-        <UserCard
-          prideContent={content.pride}
-          onClickOwnerEdit={() => onClickOwnerPride(content)}
-        />
-      ))}
+      {onClickOwnerPride
+        ? prides.map((content) => (
+            <UserCard
+              key={content.uid}
+              prideContent={content}
+              onClickOwnerEdit={() => onClickOwnerPride(content)}
+            />
+          ))
+        : prides.map((content) => <UserCard key={content.uid} prideContent={content} />)}
     </div>
   );
 };

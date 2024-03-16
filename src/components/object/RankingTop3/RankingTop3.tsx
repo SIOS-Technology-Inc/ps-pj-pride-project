@@ -1,8 +1,8 @@
 import { UserRankingCard } from '@/components/modules/UserRankingCard/UserRankingCard';
-import { PrideContentFirestoreDataType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
 
 type RankingTop3Props = {
-  prides: PrideContentFirestoreDataType[];
+  prides: PrideContentType[];
 };
 
 export const RankingTop3 = (props: RankingTop3Props) => {
@@ -11,7 +11,7 @@ export const RankingTop3 = (props: RankingTop3Props) => {
     <>
       <div className="flex w-full flex-row justify-between gap-3 gap-y-10">
         {prides.map((content, index) => (
-          <UserRankingCard key={content.uid} prideContent={content.pride} rank={index} />
+          <UserRankingCard key={content.uid} prideContent={content} rank={index} />
         ))}
       </div>
     </>

@@ -4,16 +4,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/common/Button/Button';
 import { FormInputText } from '@/components/common/FormInputText/FormInputText';
 import { FormInputTextArea } from '@/components/common/FormInputTextArea/FormInputTextArea';
-import { PrideContentType } from '@/types/contentsType';
+import { PrideContentType } from '@/types/contentPride.type';
+import { InputFormPrideContentType } from '@/types/contentsType';
 
 type FormPrideProps = {
   prideContent: PrideContentType;
-  onClickSubmit: (data: PrideContentType) => void;
+  onClickSubmit: (data: InputFormPrideContentType) => void;
 };
 
 export const FormPride = (props: FormPrideProps) => {
   const { prideContent, onClickSubmit } = props;
-  const { handleSubmit, control, reset } = useForm<PrideContentType>({
+  const { handleSubmit, control, reset } = useForm<InputFormPrideContentType>({
     defaultValues: prideContent,
   });
 
@@ -21,7 +22,9 @@ export const FormPride = (props: FormPrideProps) => {
     reset(prideContent);
   }, [prideContent, reset]);
 
-  const onSubmit: SubmitHandler<PrideContentType> = async (data: PrideContentType) => {
+  const onSubmit: SubmitHandler<InputFormPrideContentType> = async (
+    data: InputFormPrideContentType
+  ) => {
     onClickSubmit(data);
     reset();
   };

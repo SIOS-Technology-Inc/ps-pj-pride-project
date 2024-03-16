@@ -1,6 +1,5 @@
-import { useFirebaseAuth } from '@/hooks/useAuth';
-import { usePrideContent } from '@/hooks/usePrideContent';
-import { useFetchThisMonthPrideList } from '@/hooks/useReadPrideContent';
+import { useAuthenticated } from '@/hooks/useAuth';
+import { usePrideWithinOneMonth } from '@/hooks/usePride';
 
 import { ThumbsUpList } from '@/components/object/ThumbsUpList/ThumbsUpList';
 import { LoadingComponent } from '@/utilities/LoadingComponent';
@@ -11,25 +10,19 @@ export const ThumbsUpPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { user, uid } = useFirebaseAuth();
-  const { pushLikeForPride } = usePrideContent();
-  const { prideContentList, isLoadingPrideContent, prideContentMutate } =
-    useFetchThisMonthPrideList();
+  const { user, uid: userID } = useAuthenticated();
+  const { prideListWithinOneMonth, isLoadingWithinOneMonth, onClickThumbsUpButtonFunction } =
+    usePrideWithinOneMonth();
 
-  const onClickThumbsUpButton = async (uid: string) => {
-    await pushLikeForPride(uid, user.photoURL);
-    prideContentMutate();
-  };
-
-  if (isLoadingPrideContent || !prideContentList) return <LoadingComponent />;
+  if (!prideListWithinOneMonth || isLoadingWithinOneMonth) return <LoadingComponent />;
 
   return (
     <>
       <Title label={month + '月分褒めたたえよう'} />
       <ThumbsUpList
-        onClickThumbsUpButton={onClickThumbsUpButton}
-        prides={prideContentList}
-        userID={uid}
+        onClickThumbsUpButton={onClickThumbsUpButtonFunction}
+        prides={prideListWithinOneMonth.prides}
+        userID={userID}
         photoURL={user.photoURL}
       />
     </>
