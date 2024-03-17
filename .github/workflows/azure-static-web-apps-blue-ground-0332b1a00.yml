@@ -37,3 +37,4 @@ jobs:
           app_location: './'
           output_location: 'dist'
           skip_api_build: false
+          app_build_command: 'rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx && yarn install && yarn build'
