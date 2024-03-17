@@ -18,6 +18,7 @@ export const TopPage = () => {
           <a
             href="https://ryunosuke-tanaka-sti.github.io/pride-project/?path=/docs/common-button--docs"
             className="border-b border-gray"
+            target="_blank"
           >
             デザインはこちら
           </a>
@@ -25,6 +26,7 @@ export const TopPage = () => {
           <a
             href="https://blue-ground-0332b1a00.3.azurestaticapps.net/api"
             className="border-b border-gray"
+            target="_blank"
           >
             API仕様書はこちら
           </a>
