@@ -13,9 +13,9 @@ export const PrideRankingCard = (props: PrideRankingCardProps) => {
 
   return (
     <>
-      <div className="flex w-full max-w-sm flex-col">
+      <div className="inline-flex w-full max-w-sm grow flex-col">
         <span className="flex w-full items-center justify-center text-2xl">TOP.{rank + 1}</span>
-        <div className="flex w-full  flex-col gap-5 rounded-lg border border-gray/70 p-3 ">
+        <div className="flex w-full grow flex-col gap-5 rounded-lg border border-gray/70 p-3">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center gap-2 ">
               <img src={userPhotoURL} alt="" className="h-10 w-10 rounded-full object-contain" />
