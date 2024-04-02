@@ -11,6 +11,7 @@ import { useAuthenticated } from '@/hooks/useAuth';
 import { Footer } from '@/components/common/Footer/Footer';
 import { Header } from '@/components/common/Header/Header';
 import { MenuItem } from '@/components/common/MenuItem/MenuItem';
+import { OpeningAnimation } from '@/components/common/OpeningAnimation/OpeningAnimation';
 import { Menu } from '@/components/modules/Menu/Menu';
 import { AxiosConfig } from '@/utilities/AxiosConfig';
 import { ErrorBoundaryComponent } from '@/utilities/ErrorBoundary';
@@ -24,6 +25,7 @@ export const TopLayout = () => {
 
   return (
     <>
+      <OpeningAnimation />
       <section className=" flex h-full min-h-screen w-full flex-col items-center font-zen">
         <Header user={user} />
         <main className=" my-10 flex w-full max-w-5xl grow flex-col items-center gap-12">

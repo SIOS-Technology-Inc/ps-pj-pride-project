@@ -9,6 +9,7 @@ module.exports = {
         kurenaido: ['Zen Kurenaido'],
         zen: ['Zen Maru Gothic'],
         yuji: ['Yuji Syuku'],
+        dela: ['DotGothic16'],
       },
       colors: {
         gray: '#666666',
