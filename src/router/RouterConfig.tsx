@@ -4,6 +4,7 @@ import { InputPage } from '@/components/pages/InputPage';
 import { NotFoundPage } from '@/components/pages/NotFountPage';
 import { PastListPage } from '@/components/pages/PastListPage';
 import { ThumbsUpPage } from '@/components/pages/ThumbsUpPage';
+import { TimerPage } from '@/components/pages/TimerPage';
 import { TopPage } from '@/components/pages/TopPage';
 import { HasAuthenticationRouter } from '@/router/HasAuthenticationRouter';
 import { TopLayout } from '@/router/layout/TopLayout';
@@ -20,6 +21,7 @@ export const RouterConfig = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
+      <Route path="timer" element={<TimerPage />} />
     </Routes>
   );
 };
