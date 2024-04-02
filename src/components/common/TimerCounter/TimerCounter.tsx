@@ -34,7 +34,7 @@ export const TimerCounter = (props: TimerCounterProps) => {
   const textColor = isTimeOver ? textRedStyle : textBlackStyle;
 
   return (
-    <h1 className={'flex grow items-center justify-center font-dela text-9xl ' + textColor}>
+    <h1 className={'flex grow items-center justify-center font-dela text-[240px] ' + textColor}>
       {minutes}:{seconds}
     </h1>
   );

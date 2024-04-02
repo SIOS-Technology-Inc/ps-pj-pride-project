@@ -7,6 +7,7 @@ import { ThumbsUpPage } from '@/components/pages/ThumbsUpPage';
 import { TimerPage } from '@/components/pages/TimerPage';
 import { TopPage } from '@/components/pages/TopPage';
 import { HasAuthenticationRouter } from '@/router/HasAuthenticationRouter';
+import { TimerLayout } from '@/router/layout/TimerLayout';
 import { TopLayout } from '@/router/layout/TopLayout';
 
 export const RouterConfig = () => {
@@ -21,7 +22,9 @@ export const RouterConfig = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
-      <Route path="timer" element={<TimerPage />} />
+      <Route path="/timer" element={<TimerLayout />}>
+        <Route index element={<TimerPage />} />
+      </Route>
     </Routes>
   );
 };
