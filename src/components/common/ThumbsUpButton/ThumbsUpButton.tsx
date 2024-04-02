@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { FiThumbsUp } from 'react-icons/fi';
 
 type ThumbsUpButtonProps = {
+  activeFlag?: boolean;
   disable?: boolean;
   onClick: () => void;
 };
 
 export const ThumbsUpButton = (props: ThumbsUpButtonProps) => {
-  const { onClick, disable } = props;
+  const { onClick, disable, activeFlag } = props;
   const [firstClick, setFirstClick] = useState<boolean>(false);
 
   const onClickThumbsUpButton = async () => {
@@ -21,7 +22,7 @@ export const ThumbsUpButton = (props: ThumbsUpButtonProps) => {
       <button
         className={
           'flex flex-row items-center gap-1 rounded-lg p-2 transition-all ' +
-          (disable
+          (activeFlag
             ? ' bg-[#3d9ceb] p-2 text-white'
             : ' bg-[#DBDBDB] p-2 text-gray hover:-translate-x-1 hover:-translate-y-1')
         }

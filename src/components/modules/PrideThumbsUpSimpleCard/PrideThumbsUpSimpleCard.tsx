@@ -5,10 +5,11 @@ type PrideThumbsUpSimpleCardProps = {
   prideContent: PrideContentType;
   onClick?: () => void;
   ownerFlag?: boolean;
+  activeFlag?: boolean;
 };
 
 export const PrideThumbsUpSimpleCard = (props: PrideThumbsUpSimpleCardProps) => {
-  const { onClick, ownerFlag, prideContent } = props;
+  const { onClick, ownerFlag, prideContent, activeFlag } = props;
   const { userName, thumbsupUsers, title, userPhotoURL } = prideContent;
 
   return (
@@ -24,7 +25,13 @@ export const PrideThumbsUpSimpleCard = (props: PrideThumbsUpSimpleCardProps) => 
           </div>
           <div className="flex flex-row items-center gap-4">
             <span className="text-lg">{thumbsupUsers.length}</span>
-            {onClick && <ThumbsUpButton onClick={() => onClick()} disable={ownerFlag} />}
+            {onClick && (
+              <ThumbsUpButton
+                onClick={() => onClick()}
+                disable={ownerFlag}
+                activeFlag={activeFlag}
+              />
+            )}
           </div>
         </div>
       </div>
