@@ -45,6 +45,8 @@ export const Timer = () => {
           <TimerButton color="fillRed" label="reset" onClick={resetTimer} />
         </div>
         <div className="flex flex-row gap-3">
+          <TimerButton color="blue" label="3" onClick={() => setTimerValue(3 * 60)} />
+          <TimerButton color="blue" label="5" onClick={() => setTimerValue(5 * 60)} />
           <TimerButton color="blue" label="10" onClick={() => setTimerValue(10 * 60)} />
           <TimerButton color="blue" label="20" onClick={() => setTimerValue(20 * 60)} />
         </div>

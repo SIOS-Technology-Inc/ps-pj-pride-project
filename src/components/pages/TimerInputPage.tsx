@@ -7,7 +7,7 @@ import { useRealtimeDatabase } from '@/hooks/useRealtimeDatabase';
 import { Button } from '@/components/common/Button/Button';
 import { FormTukkomi } from '@/components/modules/FormTukkomi/FormTukkomi';
 
-export const SamplePage = () => {
+export const TimerInputPage = () => {
   const { textRef, saveTextData, effectRef, saveEffectData } = useRealtimeDatabase();
   const [text, setText] = useState<string>('');
   const [effect, setEffect] = useState<number>(0);
