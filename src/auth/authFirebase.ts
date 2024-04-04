@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
 import { firebaseConfig } from '@/constants/firebaseConfig';
 
@@ -12,6 +12,6 @@ provider.setCustomParameters({
   hd: 'sios.com',
 });
 
-const db = getFirestore(app);
+const database = getDatabase(app);
 
-export { auth, db, provider };
+export { auth, database, provider };

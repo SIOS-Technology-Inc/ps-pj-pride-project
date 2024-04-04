@@ -1,54 +1,40 @@
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { TimerButton } from '@/components/common/TimerButton/TimerButton';
-import { TimerCounter } from '@/components/common/TimerCounter/TimerCounter';
+import { onValue } from 'firebase/database';
+
+import { useRealtimeDatabase } from '@/hooks/useRealtimeDatabase';
+
+import { Timer } from '@/components/modules/Timer/Timer';
 
 export const TimerPage = () => {
-  const [timer, setTimer] = useState(10 * 60);
-  const [defaultValue, setDefaultValue] = useState(10 * 60);
-  const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const { textRef, effectRef } = useRealtimeDatabase();
+  const [text, setText] = useState<string>('');
+  const [effect, setEffect] = useState<number>(0);
 
-  const startTimer = () => {
-    setIsRunning(true);
-    if (!isRunning) {
-      intervalRef.current = setInterval(() => {
-        setTimer((value) => value - 1);
-      }, 1000);
-    }
-  };
+  useEffect(() => {
+    const onChange = onValue(textRef, (snapshot) => {
+      const data = snapshot.val();
+      if (typeof data != 'string') return;
+      setText(data);
+    });
+    return onChange;
+  }, [textRef]);
 
-  const stopTimer = () => {
-    setIsRunning(false);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  };
-  const resetTimer = () => {
-    setIsRunning(false);
-    setTimer(defaultValue);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  };
-  const setTimerValue = (value: number) => {
-    setTimer(value);
-    setDefaultValue(value);
-  };
+  useEffect(() => {
+    const onChange = onValue(effectRef, (snapshot) => {
+      const data = snapshot.val();
+      if (typeof data != 'number') return;
+      setEffect(data);
+    });
+    return onChange;
+  }, [effectRef]);
+
   return (
     <>
-      <TimerCounter time={timer} />
-      <div className="absolute bottom-0 left-0 flex w-full flex-row justify-between p-5">
-        <div className="flex flex-row gap-3">
-          <TimerButton color="fillBlue" label="start" onClick={startTimer} />
-          <TimerButton color="fillRed" label="pause" onClick={stopTimer} disabled={!isRunning} />
-          <TimerButton color="fillRed" label="reset" onClick={resetTimer} />
-        </div>
-        <div className="flex flex-row gap-3">
-          <TimerButton color="blue" label="10" onClick={() => setTimerValue(10 * 60)} />
-          <TimerButton color="blue" label="20" onClick={() => setTimerValue(20 * 60)} />
-        </div>
-      </div>
+      <h1 className="absolute bottom-28 left-1/2 -translate-x-1/2 text-4xl">
+        {text}:{effect}
+      </h1>
+      <Timer />
     </>
   );
 };
