@@ -1,21 +1,17 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FB_APIKEY,
-  authDomain: import.meta.env.VITE_FB_AUTHDOMAIN,
-  projectId: import.meta.env.VITE_FB_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FB_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FB_MESSAGEING_SENDER_ID,
-  appId: import.meta.env.VITE_FB_APP_ID,
-};
+import { firebaseConfig } from '@/constants/firebaseConfig';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+provider.setCustomParameters({
+  hd: 'sios.com',
+});
 
-const db = getFirestore(app);
+const database = getDatabase(app);
 
-export { auth, provider, db };
+export { auth, database, provider };

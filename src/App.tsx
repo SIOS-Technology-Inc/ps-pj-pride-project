@@ -1,15 +1,14 @@
 import { BrowserRouter } from 'react-router-dom';
 
 import { RouterConfig } from './router/RouterConfig';
-import { RouterAuthenticatedCheck } from './utilities/RouterAuthenticatedCheck';
 
 function App() {
   return (
-    <BrowserRouter>
-      <RouterAuthenticatedCheck>
+    <>
+      <BrowserRouter>
         <RouterConfig />
-      </RouterAuthenticatedCheck>
-    </BrowserRouter>
+      </BrowserRouter>
+    </>
   );
 }
 

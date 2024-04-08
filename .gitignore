@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 
 .env.development
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+storybook-static

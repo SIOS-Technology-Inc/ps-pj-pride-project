@@ -1,37 +1,80 @@
-import { useFirebaseAuth } from '@/hooks/useFirebaseAuth';
-import { useFirestorePrideContent } from '@/hooks/useFirestorePrideContent';
-import { InputFormPrideContentType, PrideContentType } from '@/types/contentsType';
+import { useState } from 'react';
 
-import { TitleComponent } from '../modules/TitleComponent';
-import { InputBoardComponent } from '../modules/inputComponent/InputBoardComponent';
+import { useAuthenticated } from '@/hooks/useAuth';
+import { useUserPride } from '@/hooks/useUserPride';
+
+import { FormPride } from '@/components/modules/FormPride/FormPride';
+import { EditFormPride } from '@/components/templates/EditFormPride/FormModalPride';
+import { UserPrideList } from '@/components/templates/UserPrideList/UserPrideList';
+import { PrideContentType } from '@/types/contentPride.type';
+import { InputFormPrideContentType } from '@/types/contentsType';
+import { LoadingComponent } from '@/utilities/LoadingComponent';
+
+import { Title } from '../common/Title/Title';
 
 export const InputPage = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
 
-  const { createPride } = useFirestorePrideContent();
-  const { user } = useFirebaseAuth();
+  const { uid } = useAuthenticated();
 
-  const InitializeData: InputFormPrideContentType = {
-    customerName: '',
-    sentence: '',
-    serviceName: '',
+  const initPrideContent: PrideContentType = {
+    uid: '',
+    userID: uid,
     title: '',
+    memo: '',
+    userName: '',
+    userPhotoURL: '',
+    thumbsupUsers: [],
+    thumbsupCount: 0,
+    createdAt: new Date(),
   };
-  const onSubmit = (content: InputFormPrideContentType) => {
-    const submitData: PrideContentType = {
-      ...content,
-      userName: user.displayName,
-      userPhotoURL: user.photoURL,
-      thumbsUsers: [],
-    };
-    createPride(submitData);
+
+  const [editPride, setEditPride] = useState<PrideContentType>(initPrideContent);
+  const modalState = useState<boolean>(false);
+  const [, setIsModal] = modalState;
+
+  const {
+    createPrideFunction,
+    deletePrideFunction,
+    isLoadingOwnPrideList,
+    ownPrideList,
+    updatePrideFunction,
+  } = useUserPride();
+
+  const onClickSubmit = async (data: InputFormPrideContentType) => {
+    await createPrideFunction(data);
   };
+
+  const onClickSubmitEdit = async (data: InputFormPrideContentType) => {
+    updatePrideFunction(editPride.uid, data);
+    setIsModal(false);
+  };
+  const onClickDelete = async () => {
+    deletePrideFunction(editPride.uid);
+    setIsModal(false);
+  };
+
+  const openEditForm = (targetData: PrideContentType) => {
+    setEditPride(targetData);
+    setIsModal(true);
+  };
+
+  if (!ownPrideList || isLoadingOwnPrideList) return <LoadingComponent />;
 
   return (
     <>
-      <TitleComponent label={month + '月の自慢を書こう'} />
-      <InputBoardComponent initializeData={InitializeData} onSubmitParentFunction={onSubmit} />
+      <Title label={month + '月の自慢を書こう'} />
+      <div className="flex w-full items-start gap-3">
+        <FormPride prideContent={initPrideContent} onClickSubmit={onClickSubmit} />
+        <UserPrideList prides={ownPrideList.prides} onClickOwnerPride={openEditForm} />
+      </div>
+      <EditFormPride
+        onClickDelete={onClickDelete}
+        onClickEdit={onClickSubmitEdit}
+        prideContent={editPride}
+        openFlagState={modalState}
+      />
     </>
   );
 };

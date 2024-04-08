@@ -51,7 +51,12 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: '@/**',
+            pattern: '@/hooks/**',
+            group: 'internal',
+            position: 'after',
+          },
+          {
+            pattern: 'modules/**',
             group: 'internal',
             position: 'after',
           },

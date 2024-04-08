@@ -1,0 +1,44 @@
+name: Storybook Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  NODE_VERSION: '18.x'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build-storybook
+      - name: Upload Documents
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./storybook-static
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
