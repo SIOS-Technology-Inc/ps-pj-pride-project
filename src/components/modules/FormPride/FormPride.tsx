@@ -29,10 +29,9 @@ export const FormPride = (props: FormPrideProps) => {
     data: InputFormPrideContentType
   ) => {
     setIsSaving(true);
-    onClickSubmit(data).then(() => {
-      reset();
-      setIsSaving(false);
-    });
+    await onClickSubmit(data);
+    reset();
+    setIsSaving(false);
   };
   return (
     <>
@@ -60,11 +59,7 @@ export const FormPride = (props: FormPrideProps) => {
           validation="280文字以内"
         />
 
-        {isSaving ? (
-          <LoadingComponent />
-        ) : (
-          <Button color="default" label="投稿" />
-        )}
+        {isSaving ? <LoadingComponent /> : <Button color="default" label="投稿" />}
       </form>
     </>
   );
