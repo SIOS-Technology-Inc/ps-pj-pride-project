@@ -25,7 +25,7 @@ jobs:
           submodules: true
 
       - name: remove storybook
-        run: rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx
+        run: rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx && yarn remove storybook
 
       - name: Build And Deploy
         id: builddeploy
