@@ -12,7 +12,9 @@ export const useUserPride = () => {
 
   const createPrideFunction = async (data: InputFormPrideContentType) => {
     await createPride(data);
-    userDataRefresh();
+    // 視覚表現のためにuserDataRefresh()も非同期処理を待機する。
+    // https://github.com/SIOS-Technology-Inc/ps-pj-pride-project/issues/9
+    await userDataRefresh();
   };
   const updatePrideFunction = async (uid: string, data: InputFormPrideContentType) => {
     await updatePride(uid, data);
