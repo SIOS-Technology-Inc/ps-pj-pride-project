@@ -1,0 +1,27 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  pull_request:
+
+env:
+  NODE_VERSION: '18.x'
+jobs:
+  test-application-build:
+    runs-on: ubuntu-latest
+    name: Application Build And Test
+    environment: static-web-apps
+    env:
+      VITE_FB_APIKEY: ${{ secrets.VITE_FB_APIKEY }}
+      VITE_FB_AUTHDOMAIN: ${{ secrets.VITE_FB_AUTHDOMAIN }}
+      VITE_FB_PROJECT_ID: ${{ secrets.VITE_FB_PROJECT_ID }}
+      VITE_FB_STORAGE_BUCKET: ${{ secrets.VITE_FB_STORAGE_BUCKET }}
+      VITE_FB_MESSAGEING_SENDER_ID: ${{ secrets.VITE_FB_MESSAGEING_SENDER_ID }}
+      VITE_FB_APP_ID: ${{ secrets.VITE_FB_APP_ID }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install Dependencies
+        run: yarn install
+      - name: Install Dependencies
+        run: yarn build
