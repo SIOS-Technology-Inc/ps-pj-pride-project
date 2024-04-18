@@ -7,9 +7,8 @@ import { useRealtimeDatabase } from '@/hooks/useRealtimeDatabase';
 import { Timer } from '@/components/modules/Timer/Timer';
 
 export const TimerPage = () => {
-  const { textRef, effectRef } = useRealtimeDatabase();
+  const { textRef } = useRealtimeDatabase();
   const [text, setText] = useState<string>('');
-  const [effect, setEffect] = useState<number>(0);
 
   useEffect(() => {
     const onChange = onValue(textRef, (snapshot) => {
@@ -20,20 +19,9 @@ export const TimerPage = () => {
     return onChange;
   }, [textRef]);
 
-  useEffect(() => {
-    const onChange = onValue(effectRef, (snapshot) => {
-      const data = snapshot.val();
-      if (typeof data != 'number') return;
-      setEffect(data);
-    });
-    return onChange;
-  }, [effectRef]);
-
   return (
     <>
-      <h1 className="absolute bottom-28 left-1/2 -translate-x-1/2 text-4xl">
-        {text}:{effect}
-      </h1>
+      <h1 className="absolute bottom-28 left-1/2 -translate-x-1/2 text-4xl">{text}</h1>
       <Timer />
     </>
   );
