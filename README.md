@@ -19,7 +19,9 @@ VITE_FB_MESSAGEING_SENDER_ID="xxxxxxxxxxxxxxxxxxxxx"
 VITE_FB_APP_ID="xxxxxxxxxxxxxxxxxxxxx"
 ```
 
-設定後以下の手順でアプリケーション起動
+設定後以下の手順でアプリケーション起動する。起動の場合は、バックエンドを立ち上げなければ初期画面からエラーが発生します。[こちらのリポジトリ](https://github.com/SIOS-Technology-Inc/ps-pj-pride-project-backend.git)から先に起動をよろしくお願いします。
+
+動作検証済み環境　NODE_VER：v18.16.0
 
 ```bash
 yarn install
@@ -70,4 +72,4 @@ gitGraph
 2024-04-24現在整備中です。
 Figmaにアクセスしたい場合は、`@Ryunosuke-Tanaka-sti`に問い合わせをよろしくお願いします。
 
-[Figma]([https://](https://www.figma.com/file/6Ic1LeHOfLHfkkM5WNMhTb/%E8%A9%A6%E9%A8%93%E5%A0%B4?type=design&node-id=0%3A1&mode=design&t=h5VULBOXgvdlip86-1))
+[Figma](https://www.figma.com/file/6Ic1LeHOfLHfkkM5WNMhTb/%E8%A9%A6%E9%A8%93%E5%A0%B4?type=design&node-id=0%3A1&mode=design&t=h5VULBOXgvdlip86-1)
