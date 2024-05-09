@@ -25,9 +25,6 @@ jobs:
         with:
           submodules: true
 
-      - name: remove storybook
-        run: rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -38,4 +35,4 @@ jobs:
           app_location: './'
           output_location: 'dist'
           skip_api_build: false
-          app_build_command: 'rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx  && yarn build'
+          app_build_command: 'rm -rf ./storybook && rm -rf ./src/components/**/*.stories.tsx && yarn remove storybook  && yarn build'

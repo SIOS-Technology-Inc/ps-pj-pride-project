@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/common/Button/Button';
@@ -6,6 +6,7 @@ import { FormInputText } from '@/components/common/FormInputText/FormInputText';
 import { FormInputTextArea } from '@/components/common/FormInputTextArea/FormInputTextArea';
 import { PrideContentType } from '@/types/contentPride.type';
 import { InputFormPrideContentType } from '@/types/contentsType';
+import { LoadingComponent } from '@/utilities/LoadingComponent';
 
 type FormPrideProps = {
   prideContent: PrideContentType;
@@ -17,16 +18,20 @@ export const FormPride = (props: FormPrideProps) => {
   const { handleSubmit, control, reset } = useForm<InputFormPrideContentType>({
     defaultValues: prideContent,
   });
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   useEffect(() => {
     reset(prideContent);
+    setIsSaving(false);
   }, [prideContent, reset]);
 
   const onSubmit: SubmitHandler<InputFormPrideContentType> = async (
     data: InputFormPrideContentType
   ) => {
-    onClickSubmit(data);
+    setIsSaving(true);
+    await onClickSubmit(data);
     reset();
+    setIsSaving(false);
   };
   return (
     <>
@@ -54,7 +59,7 @@ export const FormPride = (props: FormPrideProps) => {
           validation="280文字以内"
         />
 
-        <Button color="default" label="投稿" />
+        {isSaving ? <LoadingComponent /> : <Button color="default" label="投稿" />}
       </form>
     </>
   );

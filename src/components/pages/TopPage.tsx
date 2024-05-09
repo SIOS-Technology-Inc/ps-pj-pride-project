@@ -13,10 +13,17 @@ export const TopPage = () => {
     <>
       <Notice>
         <>
-          ソースの修正を行いしました。バグなどがあった場合は、@ry-tanakaにDMをお願いします。割と急いで修正します。
-          デザインは未完成ですが、とりあえず動くようにしました。
+          ソースの修正を行いしました。バグなどがあった場合は、
           <a
-            href="https://ryunosuke-tanaka-sti.github.io/pride-project/?path=/docs/common-button--docs"
+            href="https://github.com/SIOS-Technology-Inc/ps-pj-pride-project/issues"
+            className="border-b border-gray"
+            target="_blank"
+          >
+            issue
+          </a>
+          に起票かSlackにて@ry-tanakaへDMをお願いします。
+          <a
+            href="https://sios-technology-inc.github.io/ps-pj-pride-project/?path=/docs/common-button--docs"
             className="border-b border-gray"
             target="_blank"
           >
