@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { AdventCalendarTopPage } from '@/components/pages/AdventCalendar/TopPage';
 import { InputPage } from '@/components/pages/InputPage';
 import { NotFoundPage } from '@/components/pages/NotFountPage';
 import { PastListPage } from '@/components/pages/PastListPage';
@@ -10,6 +11,8 @@ import { TopPage } from '@/components/pages/TopPage';
 import { HasAuthenticationRouter } from '@/router/HasAuthenticationRouter';
 import { TimerLayout } from '@/router/layout/TimerLayout';
 import { TopLayout } from '@/router/layout/TopLayout';
+
+import { AdventCalendarLayout } from './layout/AdventCalendarLayout';
 
 export const RouterConfig = () => {
   return (
@@ -24,6 +27,9 @@ export const RouterConfig = () => {
         <Route path="/timer" element={<TimerLayout />}>
           <Route index element={<TimerPage />} />
           <Route path="input" element={<TimerInputPage />} />
+        </Route>
+        <Route path="/advent-calendar" element={<AdventCalendarLayout />}>
+          <Route index element={<AdventCalendarTopPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
