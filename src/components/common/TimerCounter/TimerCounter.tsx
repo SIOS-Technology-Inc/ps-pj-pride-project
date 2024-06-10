@@ -18,6 +18,7 @@ export const TimerCounter = (props: TimerCounterProps) => {
       return `${minute}`;
     }
   }, [time, isTimeOver]);
+
   const seconds = useMemo(() => {
     const temp = isTimeOver ? time * -1 : time;
     const second = Math.floor(temp % 60);
@@ -28,13 +29,13 @@ export const TimerCounter = (props: TimerCounterProps) => {
     }
   }, [time, isTimeOver]);
 
-  const textBlackStyle = ' text-black';
-  const textRedStyle = ' text-red-500';
-
-  const textColor = isTimeOver ? textRedStyle : textBlackStyle;
-
   return (
-    <h1 className={'flex grow items-center justify-center font-dela text-[240px] ' + textColor}>
+    <h1
+      className={
+        'flex grow items-center justify-center font-dela text-[240px] ' +
+        (isTimeOver ? ' text-red-500' : ' text-black')
+      }
+    >
       {minutes}:{seconds}
     </h1>
   );
