@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { ImagePage } from '@/components/pages/ImagePage';
 import { InputPage } from '@/components/pages/InputPage';
 import { NotFoundPage } from '@/components/pages/NotFountPage';
 import { PastListPage } from '@/components/pages/PastListPage';
@@ -25,6 +26,7 @@ export const RouterConfig = () => {
           <Route index element={<TimerPage />} />
           <Route path="input" element={<TimerInputPage />} />
         </Route>
+        <Route path="/image" element={<ImagePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
