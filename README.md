@@ -6,7 +6,6 @@
 
 ![インフラ情報](./.github/assets/21b70934c44400a03e9678127314da46.webp)
 
-
 ### リポジトリ-ソースコード
 
 - [フロントエンド：ps-pj-pride-project](https://github.com/SIOS-Technology-Inc/ps-pj-pride-project.git)

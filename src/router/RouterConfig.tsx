@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { AdventCalendarTopPage } from '@/components/pages/AdventCalendar/TopPage';
 import { InputPage } from '@/components/pages/InputPage';
 import { NotFoundPage } from '@/components/pages/NotFountPage';
 import { PastListPage } from '@/components/pages/PastListPage';
@@ -25,6 +26,7 @@ export const RouterConfig = () => {
           <Route index element={<TimerPage />} />
           <Route path="input" element={<TimerInputPage />} />
         </Route>
+        <Route path="/advent-calendar" element={<AdventCalendarTopPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
