@@ -14,6 +14,10 @@ module.exports = {
       colors: {
         gray: '#666666',
         event: '#81B9D0',
+        ad: {
+          main: '#1A4661',
+          sub: '#5AAFE1',
+        },
       },
     },
   },
