@@ -12,8 +12,6 @@ import { HasAuthenticationRouter } from '@/router/HasAuthenticationRouter';
 import { TimerLayout } from '@/router/layout/TimerLayout';
 import { TopLayout } from '@/router/layout/TopLayout';
 
-import { AdventCalendarLayout } from './layout/AdventCalendarLayout';
-
 export const RouterConfig = () => {
   return (
     <Routes>
@@ -28,9 +26,7 @@ export const RouterConfig = () => {
           <Route index element={<TimerPage />} />
           <Route path="input" element={<TimerInputPage />} />
         </Route>
-        <Route path="/advent-calendar" element={<AdventCalendarLayout />}>
-          <Route index element={<AdventCalendarTopPage />} />
-        </Route>
+        <Route path="/advent-calendar" element={<AdventCalendarTopPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
