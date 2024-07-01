@@ -18,6 +18,8 @@
     "axios": "^1.6.7",
     "firebase": "^10.10.0",
     "html-react-parser": "^3.0.10",
+    "linkify-react": "^4.1.3",
+    "linkifyjs": "^4.1.3",
     "plop": "^4.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
