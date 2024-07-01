@@ -20,7 +20,7 @@ export const AdventCalendarTopPage = () => {
           </div>
           <div className="flex w-full max-w-4xl flex-col items-center gap-3 bg-white py-8">
             <h1 className=" w-full rounded bg-ad-main p-3 text-center text-2xl text-white">
-              6月 仕事が捗るガジェット紹介
+              8月 生成AI関連アドベントカレンダー
             </h1>
             <iframe
               src="https://calendar.google.com/calendar/embed?src=c_cd3c7b537dac7b5394276ed5edbb7a545c2e83a0b7a38e51c2b774182a026172%40group.calendar.google.com&ctz=Asia%2FTokyo"
